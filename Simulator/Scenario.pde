@@ -79,14 +79,15 @@ class Scenario{
     int margin = 75;
     // scenario 1 visuals
     pushMatrix();
+    // TODO fix this
+    if(!firstperson && pathplannerscreen){ translate(0,0,1); }
     if(firstperson){ translate(0,0,-10); }
     
-    
-   // if(!firstperson && pathplannerscreen == true){translate(0,0,2);}
+   
     fill(0,0,255);
-    //rect(280,75,80,80); // block
     rect(580,75,20,80); // area 1
     rect(220,75,20,80); // area 2
+    
     fill(30);
     stroke(255);
     rect(240,(gridHeight/2)-margin/2,gridWidth/1.5,margin); // area 3
@@ -97,26 +98,29 @@ class Scenario{
     popMatrix();
     
     // area 1
-    if(carlocation.x >580 && carlocation.x <600){
-      if(carlocation.y >75 && carlocation.y< 155){
-              if(controlState == 1){car.setDriveStatus(false);}
-              if(controlState == 2){car.setDriveStatus(true);}
-              
+    if(carlocation.x >580 && carlocation.x <600 && carlocation.y >75 && carlocation.y< 155){
+      
+                    if(controlState == 1){car.setDriveStatus(false);}
+                    if(controlState == 2){car.setDriveStatus(true);}
+                    
                     if(sendswitch == false && controlState == 1 && serialavailable){
                     myPort.write ('3');
                     sendswitch = true;
-              }
       }
-    // area 2
-    }else if(carlocation.x >220 && carlocation.x <240){
-      if(carlocation.y >75 && carlocation.y< 155){
-          println("test");
       
-      }
-    
+    // area 2
+    }else if(carlocation.x >220 && carlocation.x <240 && carlocation.y >75 && carlocation.y< 155){
+            
+                println("test2");
+
+    }else if(carlocation.x > 240 && carlocation.x < 240 + gridWidth/1.5 && carlocation.y >(gridHeight/2)-(margin/2) && carlocation.y < (gridHeight/2)-(margin/2) + margin ){
+            
+              println("test3");
+              car.setSpeed(1.0);
     
     }else{
         sendswitch = false;
+        car.setSpeed(0.5);
     }
   }
 

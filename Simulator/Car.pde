@@ -13,6 +13,11 @@ class Car{
   float cameraX, cameraY;
   float speed = 0.5;
   
+  // acceleration variables
+  float acceleration = 0.0001;
+  float nettospeed = 0.0;
+  
+  
   boolean drive = false;
   
   Car(){
@@ -26,6 +31,7 @@ class Car{
   
   void update(){
     
+    speedControl();
     
     if(drive == true){
       if(autopilot == true){velocity.add(force);}
@@ -45,6 +51,17 @@ class Car{
      // println(force);
     //println(velocity.y);
     }
+  }
+  
+  void speedControl(){
+  
+      if(nettospeed < speed){
+        nettospeed += acceleration;
+      } else if(nettospeed< speed){
+        nettospeed -= acceleration;
+      }
+  
+  
   }
   
   void display(){
