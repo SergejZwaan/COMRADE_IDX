@@ -21,7 +21,7 @@ class Car{
   boolean drive = false;
   
   Car(){
-    location = new PVector(gridWidth/2,gridHeight/2);
+    location = new PVector(gridWidth/2,gridHeight/2+200);
     velocity = new PVector(0,0);
     velocity = new PVector(0,-0.1);
     force = new PVector(0,0);

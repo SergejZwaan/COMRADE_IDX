@@ -111,7 +111,9 @@ class Scenario{
     // area 2
     }else if(carlocation.x >220 && carlocation.x <240 && carlocation.y >75 && carlocation.y< 155){
             
-                println("test2");
+               if(sendswitch == false && controlState == 2 && serialavailable){
+                    myPort.write ('4');
+                    sendswitch = true;}
 
     }else if(carlocation.x > 240 && carlocation.x < 240 + gridWidth/2 && carlocation.y >(gridHeight/2)-(margin/2) && carlocation.y < (gridHeight/2)-(margin/2) + margin ){
             
@@ -120,7 +122,7 @@ class Scenario{
     
     }else{
         sendswitch = false;
-        car.setSpeed(0.8);
+        car.setSpeed(0.5);
     }
   }
 
