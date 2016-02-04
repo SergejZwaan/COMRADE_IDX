@@ -14,7 +14,7 @@ class Car{
   float speed = 0.5;
   
   // acceleration variables
-  float acceleration = 0.0001;
+  float acceleration = 0.005;
   float nettospeed = 0.0;
   
   
@@ -23,6 +23,7 @@ class Car{
   Car(){
     location = new PVector(gridWidth/2,gridHeight/2);
     velocity = new PVector(0,0);
+    velocity = new PVector(0,-0.1);
     force = new PVector(0,0);
     xold = location.x;
     yold = location.y;
@@ -36,13 +37,13 @@ class Car{
     if(drive == true){
       if(autopilot == true){velocity.add(force);}
       velocity.rotate(theta);
-      velocity.setMag(speed);
+      velocity.setMag(nettospeed);
       location.add(velocity);
       
       distx = location.x - (location.x - xold)*50;
       disty = location.y - (location.y - yold)*50;
-      cameraX = location.x - (location.x - xold)*200;
-      cameraY = location.y - (location.y - yold)*200;
+      cameraX = location.x - (location.x - xold)*80 /car.getNettoSpeed();
+      cameraY = location.y - (location.y - yold)*80 /car.getNettoSpeed();
       xold = location.x;
       yold = location.y;
       
@@ -57,7 +58,7 @@ class Car{
   
       if(nettospeed < speed){
         nettospeed += acceleration;
-      } else if(nettospeed< speed){
+      } else if(nettospeed> speed){
         nettospeed -= acceleration;
       }
   
@@ -102,21 +103,26 @@ class Car{
  // key controll
 void keyPressed() {
   if (key == CODED) {
-    if (keyCode == UP) {
-      manualinput = false;
-      autopilot = true;
-      velocity = new PVector(0,-0.1);
-      drive = true;
-      p.startAutonomousDriving(autopilot);
-    } else if (keyCode == DOWN) {
-      theta = 0.0;
-    }  else if (keyCode == LEFT){
-      theta = HALF_PI/180/2;
-    } else if(keyCode == RIGHT){
-      theta = -HALF_PI/180/2;
-    } else{
-      theta = 0.0;
-    }
+        if (keyCode == UP) {
+          manualinput = false;
+          autopilot = true;
+          theta = 0.0;
+          drive = true;
+          p.startAutonomousDriving(autopilot);
+          
+          
+        } else if (keyCode == DOWN) {
+          theta = 0.0;
+          
+          
+          
+        }  else if (keyCode == LEFT){
+          theta = HALF_PI/180/2;
+        } else if(keyCode == RIGHT){
+          theta = -HALF_PI/180/2;
+        } else{
+          theta = 0.0;
+        }
   }
 
 }
@@ -131,7 +137,7 @@ void resetTheta(){
 }
 
 void keyReleased(){
-  //theta = 0;
+ // theta = 0;
 }
 
 PVector getLocation(){
@@ -161,6 +167,14 @@ void setSpeed(float input){
 
 float getTheta(){
     return theta;
+}
+
+float getSpeed(){
+  return speed;
+}
+
+float getNettoSpeed(){
+  return nettospeed;
 }
 
 

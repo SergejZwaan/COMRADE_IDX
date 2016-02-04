@@ -90,7 +90,7 @@ class Scenario{
     
     fill(30);
     stroke(255);
-    rect(240,(gridHeight/2)-margin/2,gridWidth/1.5,margin); // area 3
+    rect(240,(gridHeight/2)-margin/2,gridWidth/2,margin); // area 3
     
     translate(280,130,-5);
     fill(255);
@@ -113,14 +113,14 @@ class Scenario{
             
                 println("test2");
 
-    }else if(carlocation.x > 240 && carlocation.x < 240 + gridWidth/1.5 && carlocation.y >(gridHeight/2)-(margin/2) && carlocation.y < (gridHeight/2)-(margin/2) + margin ){
+    }else if(carlocation.x > 240 && carlocation.x < 240 + gridWidth/2 && carlocation.y >(gridHeight/2)-(margin/2) && carlocation.y < (gridHeight/2)-(margin/2) + margin ){
             
               println("test3");
-              car.setSpeed(1.0);
+              car.setSpeed(2.0);
     
     }else{
         sendswitch = false;
-        car.setSpeed(0.5);
+        car.setSpeed(0.8);
     }
   }
 
