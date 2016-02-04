@@ -258,6 +258,12 @@ class Car_Light
               }
             }
           }
+
+          if(state == 6){
+
+            
+            
+            }
   }
   
   // return function
