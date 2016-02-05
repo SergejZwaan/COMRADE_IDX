@@ -16,6 +16,7 @@ class Scenario{
     pushMatrix();
     translate(0,0,5);
     draw_road();
+    draw_buildings();
     scenario1();
     popMatrix();
   }
@@ -73,6 +74,11 @@ class Scenario{
   
   void draw_buildings(){
   
+         pushMatrix();
+        translate(200,250,-5);
+        fill(255);
+        box(20,20,50);
+        popMatrix();
   }
   
   void scenario1(){
@@ -87,14 +93,40 @@ class Scenario{
     fill(0,0,255);
     rect(580,75,20,80); // area 1
     rect(220,75,20,80); // area 2
+   
+   rect((gridWidth/2)+margin,gridHeight-margin*2,(gridWidth/3),margin);      // rect 5
     
     fill(30);
     stroke(255);
     rect(240,(gridHeight/2)-margin/2,gridWidth/2,margin); // area 3
     
-    translate(280,130,-5);
-    fill(255);
-    box(20);
+      
+        pushMatrix();
+        translate(280,130,-5);
+        fill(255);
+        box(20);
+        popMatrix();
+        
+        pushMatrix();
+        translate((gridWidth/2)+margin*2,gridHeight-margin*2,-5);
+        fill(255);
+        box(20);
+        popMatrix();
+        
+        pushMatrix();
+        translate((gridWidth/2)+margin*4,gridHeight-margin*2,-5);
+        fill(255);
+        box(20);
+        popMatrix();
+        
+        pushMatrix();
+        translate((gridWidth/2)+margin*6,gridHeight-margin*2,-5);
+        fill(255);
+        box(20);
+        popMatrix();
+        
+        
+        
     popMatrix();
     
     // area 1
