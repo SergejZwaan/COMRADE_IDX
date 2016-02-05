@@ -51,7 +51,7 @@ boolean firstperson = false;        // first person view
 
 boolean startpathplanner = false;   // pathplanner
 boolean manualinput = true;         // manual input
-boolean serialavailable = false;     // serial device available
+boolean serialavailable = true;     // serial device available
 boolean loadpreset = true;
 
 boolean startscreen = true;         // startscrien on

@@ -12,6 +12,7 @@ class Scenario{
   void run(){
     carlocation = car.getLocation().copy();
     
+    if(firstperson){
     draw_road();
     pushMatrix();
     translate(0,0,5);
@@ -19,6 +20,8 @@ class Scenario{
     draw_buildings();
     scenario1();
     popMatrix();
+    }
+    
   }
   
   // draw the road visual
@@ -74,11 +77,41 @@ class Scenario{
   
   void draw_buildings(){
   
-         pushMatrix();
-        translate(200,250,-5);
+        for( int i = 0; i <6; i++){
+        pushMatrix();
+        translate(250 + i*220,250,-150);
         fill(255);
-        box(20,20,50);
+        box(120,80,350);
         popMatrix();
+        }
+        
+        for( int i = 0; i <6; i++){
+        pushMatrix();
+        translate(250 + i*220,550,-150);
+        fill(255);
+        box(80,120,350);
+        popMatrix();
+        }
+        
+        // top
+        
+        for( int i = 0; i <6; i++){
+        pushMatrix();
+        translate(200 + i*240,0,-150);
+        fill(255);
+        box(200,80,350);
+        popMatrix();
+        }
+        
+        // bottom
+        
+        for( int i = 0; i <6; i++){
+        pushMatrix();
+        translate(200 + i*240,gridHeight,-150);
+        fill(255);
+        box(200,80,350);
+        popMatrix();
+        }
   }
   
   void scenario1(){
@@ -94,7 +127,7 @@ class Scenario{
     rect(580,75,20,80); // area 1
     rect(220,75,20,80); // area 2
    
-   rect((gridWidth/2)+margin,gridHeight-margin*2,(gridWidth/3),margin);      // rect 5
+   rect((gridWidth/2)+margin,gridHeight-margin*2,(gridWidth/3),margin);      // rect 4
     
     fill(30);
     stroke(255);
@@ -151,6 +184,14 @@ class Scenario{
             
               println("test3");
               car.setSpeed(2.0);
+    
+    }else if(carlocation.x > (gridWidth/2)+margin && carlocation.x < (gridWidth/2)+margin + (gridWidth/3) && carlocation.y >gridHeight-margin*2 && carlocation.y < gridHeight-margin*2 + margin ){
+            
+              if(sendswitch == false && controlState == 1 && serialavailable){
+                    myPort.write ('5');
+                    sendswitch = true;
+                  }
+              car.setSpeed(0.3);
     
     }else{
         sendswitch = false;

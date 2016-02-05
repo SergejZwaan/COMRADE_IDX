@@ -42,8 +42,8 @@ class Car{
       
       distx = location.x - (location.x - xold)*50;
       disty = location.y - (location.y - yold)*50;
-      cameraX = location.x - (location.x - xold)*100 /car.getNettoSpeed();
-      cameraY = location.y - (location.y - yold)*100 /car.getNettoSpeed();
+      cameraX = location.x - (location.x - xold)*120 /car.getNettoSpeed();
+      cameraY = location.y - (location.y - yold)*120 /car.getNettoSpeed();
       xold = location.x;
       yold = location.y;
       

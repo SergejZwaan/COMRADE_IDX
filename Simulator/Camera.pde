@@ -14,7 +14,7 @@ class Camera{
   void first_Person(){
     PVector eye = car.getLocation().copy();
     PVector camerapoint = car.getCameraLocation().copy();
-    camera( camerapoint.x, camerapoint.y, -60, eye.x, eye.y, -30, 0, 0, 1);
+    camera( camerapoint.x, camerapoint.y, -40, eye.x, eye.y, -40, 0, 0, 1);
   
   }
   
