@@ -32,18 +32,25 @@ class Car{
   
   void update(){
     
+    // speed manager
     speedControl();
-    
+   
+    // update code
     if(drive == true){
-      if(autopilot == true){velocity.add(force);}
+     
+        if(autopilot == true){
+          velocity.add(force);
+        }
+      
       velocity.rotate(theta);
       velocity.setMag(nettospeed);
       location.add(velocity);
       
+      
       distx = location.x - (location.x - xold)*50;
       disty = location.y - (location.y - yold)*50;
-      cameraX = location.x - (location.x - xold)*120 /car.getNettoSpeed();
-      cameraY = location.y - (location.y - yold)*120 /car.getNettoSpeed();
+      cameraX = location.x - (location.x - xold)*70 /car.getNettoSpeed();
+      cameraY = location.y - (location.y - yold)*70 /car.getNettoSpeed();
       xold = location.x;
       yold = location.y;
       
@@ -51,7 +58,12 @@ class Car{
       
      // println(force);
     //println(velocity.y);
+    }else if(drive == false){
+      //velocity = new PVector(0.0,0.0);
     }
+    
+     
+      
   }
   
   void speedControl(){
@@ -73,20 +85,21 @@ class Car{
     translate(0,0,0);
     rotate(theta);
    // line(location.x,location.y,distx,disty);
-    ellipse(location.x,location.y,20,20);
+    //ellipse(location.x,location.y,20,20);
     //ellipse(distx,disty,10,10);
     //ellipse(cameraX,cameraY,5,5);
     popMatrix();
     
     pushMatrix();
-    translate(location.x,location.y,-10);
+    translate(location.x,location.y,-5);
     rotate(angle);
     strokeWeight(1);
     fill(255);
     stroke(0);
     rotate(PI);
-    rect(0,0,40,20);
+    //rect(0,0,40,20);
     //box(30,20,10);
+    translate(-30, -10,0);
     shape(carShape,10,10);
     popMatrix();
     rectMode(CORNER);

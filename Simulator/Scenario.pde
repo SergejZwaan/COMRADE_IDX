@@ -182,16 +182,18 @@ class Scenario{
 
     }else if(carlocation.x > 240 && carlocation.x < 240 + gridWidth/2 && carlocation.y >(gridHeight/2)-(margin/2) && carlocation.y < (gridHeight/2)-(margin/2) + margin ){
             
-              println("test3");
+              //println("test3");
               car.setSpeed(2.0);
     
     }else if(carlocation.x > (gridWidth/2)+margin && carlocation.x < (gridWidth/2)+margin + (gridWidth/3) && carlocation.y >gridHeight-margin*2 && carlocation.y < gridHeight-margin*2 + margin ){
-            
+              //println("area 4");
               if(sendswitch == false && controlState == 1 && serialavailable){
+                    println("run area 4");
                     myPort.write ('5');
                     sendswitch = true;
+                    car.setSpeed(0.3);
                   }
-              car.setSpeed(0.3);
+              
     
     }else{
         sendswitch = false;

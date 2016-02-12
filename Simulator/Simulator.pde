@@ -32,6 +32,7 @@ Connection co;             // Create object from connection class
 Serial myPort;             // Create object from Serial class
 SystemMonitor sm;
 Scenario DemoDay;
+Interface comrade;
 
 PShape carShape;
 
@@ -73,9 +74,17 @@ void setup() {
 
   f = createFont("Arial", 24);        // Initialize font
   textFont(f);
-  carShape = loadShape("protocar.obj");
-  println(carShape.width);
-  carShape.scale(100);
+  
+  carShape = loadShape("comradecar1.obj");
+  carShape.scale(5);
+ carShape.rotateY(PI);
+  carShape.rotateX(PI/2);
+  
+  //carShape.rotateZ(PI/2);
+  //carShape.scale(1);
+  
+  // start automatically in autonomous driving mode
+  controlState = 1;
   
 }
 
@@ -101,20 +110,12 @@ void draw(){
   
   // manual drive
   if(controlState == 2){
-    autopilot = false;
-    manualinput = true;
-    car.applyForce(new PVector(0,0));
-    p.resetPathPlanner();
-    startpathplanner = false;
+      comrade.Set_Manual_Drive();
   } 
   
   // autonomous drive
   if(controlState == 1){
-      manualinput = false;
-      car.resetTheta();
-      autopilot = true;
-      p.startAutonomousDriving(autopilot);
-      startpathplanner = true;
+     comrade.Set_Autonomous_Drive(); 
   }
 }
 
@@ -165,12 +166,7 @@ void gui(){
     }if (key == 'p'){
       // set autopilot true
       // set manual drive false
-      manualinput = false;
-      car.resetTheta();
-      autopilot = true;
-      p.startAutonomousDriving(autopilot);
-      startpathplanner = true;
-      controlState = 1;
+      
     }
     
     
@@ -199,6 +195,7 @@ void gui(){
           }
     }
   }
+  
   
  
 

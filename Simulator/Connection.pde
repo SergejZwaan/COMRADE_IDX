@@ -22,7 +22,7 @@ class Connection{
         if(message != null && message.length() > 5){
         String initial = message.substring(2,7);
        
-        println(initial);
+        //println(initial);
           if( initial.equals("start")){
           
            steervalue = message.substring(7,message.indexOf('b'));

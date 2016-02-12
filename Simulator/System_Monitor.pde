@@ -12,7 +12,15 @@ SystemMonitor(){
 
 void run(int Tsteer){
     steer = Tsteer;
-    println("serial = " + serialavailable + "  -  " + "steer = " + steer + "  -  " + "controlstate = " +controlState + "  -  " + "theta = " + car.getTheta() + "Speed = " + car.getSpeed() + "Nspeed = " + car.getNettoSpeed());
+    println(
+    "serial = " + serialavailable + "  -  " + 
+    "steer = " + steer + "  -  " + 
+    "controlstate = " +controlState + "  -  " + 
+    "theta = " + car.getTheta() + "  -  " + 
+    "Speed = " + car.getSpeed() + "  -  " + 
+    "drive status = " + car.getDriveStatus() + "  -  " + 
+    "Nspeed = " + car.getNettoSpeed()
+    );
 }
 
 

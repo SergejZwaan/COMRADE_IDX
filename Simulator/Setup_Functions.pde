@@ -20,6 +20,7 @@ void initialize_objects(){
   co = new Connection();
   DemoDay = new Scenario();
   sm = new SystemMonitor();
+  comrade = new Interface();
 
 
 }
