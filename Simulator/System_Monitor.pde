@@ -9,7 +9,7 @@ SystemMonitor(){
   steer = 512;
   table = new Table();
   
-  //table.addColumn("Serial Available");
+  table.addColumn("Serial Available");
   table.addColumn("Steer Value");
   table.addColumn("Control State");
   
@@ -35,9 +35,13 @@ void run(int Tsteer){
   
   //newRow.setBoolean("Serial Available", serialavailable);
    TableRow row = table.getRow(0);
+   row.setInt("Serial Available", int(serialavailable));
    row.setFloat("Steer Value", steer);
- // newRow.setInt("name", "Lion");
-  saveTable(table, "data/sharedmemory.csv");
+   row.setInt("Control State", controlState);
+ //  row.setInt("Drive Status", int(car.getDriveStatus()));
+  // row.setFloat("Netto Speed", car.getNettoSpeed());
+  
+  saveTable(table, "../data/sharedmemory.csv");
 }
 
 

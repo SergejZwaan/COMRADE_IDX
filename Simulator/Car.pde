@@ -44,8 +44,8 @@ class Car{
       
       velocity.rotate(theta);
       velocity.setMag(nettospeed);
-      location.add(velocity);
-      
+     if(drive){ location.add(velocity);}
+      else{location.add(new PVector(0.0,0.0));}
       
       distx = location.x - (location.x - xold)*50;
       disty = location.y - (location.y - yold)*50;
@@ -78,37 +78,26 @@ class Car{
   }
   
   void display(){
-    rectMode(CENTER);
-    ellipseMode(CENTER);
-    fill(255);
+
     pushMatrix();
-    translate(0,0,0);
-    rotate(theta);
-   // line(location.x,location.y,distx,disty);
-    //ellipse(location.x,location.y,20,20);
-    //ellipse(distx,disty,10,10);
-    //ellipse(cameraX,cameraY,5,5);
+      translate(location.x,location.y,-5);
+      rotate(angle);
+      strokeWeight(1);
+      fill(255);
+      stroke(0);
+      rotate(PI);
+   
+      translate(-30, -10,0);
+      shape(carShape,10,10);
     popMatrix();
     
-    pushMatrix();
-    translate(location.x,location.y,-5);
-    rotate(angle);
-    strokeWeight(1);
-    fill(255);
-    stroke(0);
-    rotate(PI);
-    //rect(0,0,40,20);
-    //box(30,20,10);
-    translate(-30, -10,0);
-    shape(carShape,10,10);
-    popMatrix();
-    rectMode(CORNER);
+    
   }
   
   void run(){
     keyPressed();
     keyReleased();
-    update();
+    if(drive){update();}
     display();
   }
   
@@ -117,18 +106,9 @@ class Car{
 void keyPressed() {
   if (key == CODED) {
         if (keyCode == UP) {
-          manualinput = false;
-          autopilot = true;
-          theta = 0.0;
           drive = true;
-          p.startAutonomousDriving(autopilot);
-          
-          
         } else if (keyCode == DOWN) {
           theta = 0.0;
-          
-          
-          
         }  else if (keyCode == LEFT){
           theta = HALF_PI/180/2;
         } else if(keyCode == RIGHT){
@@ -143,6 +123,7 @@ void keyPressed() {
 void setSteer(int input){
   float steerValueInput = map(input,700,1024,-HALF_PI,HALF_PI);
   theta = -steerValueInput/270;
+  println(theta);
 }
 
 void resetTheta(){

@@ -52,11 +52,12 @@ boolean firstperson = false;        // first person view
 
 boolean startpathplanner = false;   // pathplanner
 boolean manualinput = true;         // manual input
-boolean serialavailable = false;     // serial device available
+boolean serialavailable = true;     // serial device available
 boolean loadpreset = true;
 
 boolean startscreen = true;         // startscrien on
 boolean pathplannerscreen = false;         // startscrien on
+boolean keycontrol = false;
 
 PFont f;                    // Font variable
 
@@ -69,31 +70,28 @@ Create program setup
 void setup() {
   size(1600,800,P3D);
   
+  // initialization
   initialize_serial(serialavailable); // Initialize the serial connection 
   initialize_objects();               // Initialize the objects
 
+  // startscreen font
   f = createFont("Arial", 24);        // Initialize font
   textFont(f);
   
+  // configurate car shape
   carShape = loadShape("comradecar1.obj");
   carShape.scale(5);
- carShape.rotateY(PI);
+  carShape.rotateY(PI);
   carShape.rotateX(PI/2);
-  
-  //carShape.rotateZ(PI/2);
-  //carShape.scale(1);
-  
-  // start automatically in autonomous driving mode
-  controlState = 1;
+
   
 }
 
 void draw(){
   background(255);
   lights();
-  if(startscreen){
-      startgui.run();
-  }
+  
+  if(startscreen){  startgui.run();  }
   
   
   DemoDay.run();
@@ -105,7 +103,8 @@ void draw(){
   
   sm.run(co.getSteerValue());// system monitor
   
-  if( autopilot == false && manualinput == true && serialavailable){car.setSteer(co.getSteerValue());}
+  //if( controlState == 2 && serialavailable){  car.setSteer(co.getSteerValue());  }
+  car.setSteer(co.getSteerValue());
   car.run();
   
   // manual drive
@@ -124,79 +123,3 @@ void mouseMoved(){
 }
 
 //TODO has to be made graphical
-void gui(){
-  
-  if (keyPressed) {
-    if (key == ENTER && autopilot == false) {
-      autopilot = true;
-      println("start autopilot");
-    } if (key == 's'){
-      if( start == false){
-      car.setDriveStatus(true);
-      println("start car");
-      }
-      else{
-      car.setDriveStatus(false);
-      println("stop car");
-      }
-    }if (key == 'q'){
-     firstperson = true;
-     
-     startscreen = false;
-     pathplannerscreen = false;
-    } if (key == 'w'){
-      firstperson = false;
-      //endCamera();
-    }if (key == 'x' && startscreen == false) {
-      println("shift");
-       autopilot = false;
-       start = false;
-       firstperson = false;
-       startscreen = true;
-       startpathplanner = false;
-    } if (key == 'o'){
-      // set autopilot false
-      // set manual drive true
-      autopilot = false;
-      manualinput = true;
-      //car.applyForce(new PVector(0,0));
-      car.resetTheta();
-      startpathplanner = false;
-      controlState = 2;
-    }if (key == 'p'){
-      // set autopilot true
-      // set manual drive false
-      
-    }
-    
-    
-     // Controlling the comrade
-     // Serial commands
-     
-    if(serialavailable){
-          if (key == '0') {
-            myPort.write ('0');
-            //println("check");
-          }
-          if (key == '1') {
-            myPort.write ('1');
-          }
-          if (key == '2') {
-            myPort.write ('2');
-          }
-          if (key == '3') {
-            myPort.write ('3');
-          }
-          if (key == '4') {
-            myPort.write ('4');
-          }
-          if (key == '5') {
-            myPort.write ('5');
-          }
-    }
-  }
-  
-  
- 
-
-}
