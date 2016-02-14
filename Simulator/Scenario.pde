@@ -165,8 +165,14 @@ class Scenario{
     // area 1
     if(carlocation.x >580 && carlocation.x <600 && carlocation.y >75 && carlocation.y< 155){
       
-                    if(controlState == 1){car.setDriveStatus(false);}
-                    if(controlState == 2){car.setDriveStatus(true);}
+                    if(controlState == 1){
+                    car.setDriveStatus(false);
+                    update = false;
+                    }
+                    if(controlState == 2){
+                    car.setDriveStatus(true);
+                    update = true;
+                    }
                     
                     if(sendswitch == false && controlState == 1 && serialavailable){
                     myPort.write ('3');

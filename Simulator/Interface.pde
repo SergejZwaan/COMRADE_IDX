@@ -70,6 +70,11 @@ void gui(){
       // set autopilot true
       // set manual drive false
       
+    }if (key == 'z'){
+      update = true;
+      
+    }if (key == 'a'){
+      update = false;
     }
     
     

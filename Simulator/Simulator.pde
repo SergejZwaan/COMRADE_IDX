@@ -58,6 +58,7 @@ boolean loadpreset = true;
 boolean startscreen = true;         // startscrien on
 boolean pathplannerscreen = false;         // startscrien on
 boolean keycontrol = false;
+boolean update = false;
 
 PFont f;                    // Font variable
 

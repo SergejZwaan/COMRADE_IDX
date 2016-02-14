@@ -97,7 +97,7 @@ class Car{
   void run(){
     keyPressed();
     keyReleased();
-    if(drive){update();}
+    if(drive && update){update();}
     display();
   }
   
