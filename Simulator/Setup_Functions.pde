@@ -21,21 +21,30 @@ void initialize_objects(){
   DemoDay = new Scenario();
   sm = new SystemMonitor();
   comrade = new Interface();
+  js = new JoyStick();
 
 
 
 }
 
-void initJoystick(){
-
-         // Initialise the ControlIO
-  control = ControlIO.getInstance(this);
-  // Find a device that matches the configuration file
-  stick = control.getMatchedDevice("joystick");
-  if (stick == null) {
-    println("No suitable device configured");
-    System.exit(-1); // End the program NOW!
-  }
+void initialize_carShape(){
   
+  // configurate car shape
+  carShape = loadShape("comradecar1.obj");
+  carShape.scale(5);
+  carShape.rotateY(PI);
+  carShape.rotateX(PI/2);
+}
 
+void initialize_joyStick(){
+
+ 
+
+}
+
+void initialize_typo(){
+    // startscreen font
+  f = createFont("Arial", 24);        // Initialize font
+  textFont(f);
+  
 }

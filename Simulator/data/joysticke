@@ -1,0 +1,6 @@
+Shadow maker
+W	W position	3	SLIDER	Wheel axis	0	1.0	0.0
+A	A position	3	SLIDER	Accelerator	0	1.0	0.0
+B	B position	3	SLIDER	Brake		0	1.0	0.0
+LP	Drop shadow	1	BUTTON	Left Paddle	0	0.0	0.0
+RP	Leave trail	1	BUTTON	Right Paddle	0	0.0	0.0

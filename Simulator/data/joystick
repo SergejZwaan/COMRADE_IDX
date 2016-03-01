@@ -1,5 +1,6 @@
 Shadow maker
 X	X position	3	SLIDER	Wheel axis	0	1.0	0.0
-Y	Y position	3	SLIDER	Combined pedals	0	1.0	0.0
-SHADOW	Drop shadow	1	BUTTON	Button 5	0	0.0	0.0
-TRAIL	Leave trail	1	BUTTON	Button 6	0	0.0	0.0
+Y	Y position	3	SLIDER	Accelerator	0	1.0	0.0
+Z	Z position	3	SLIDER	Brake		0	1.0	0.0
+SHADOW	Drop shadow	1	BUTTON	Left Paddle	0	0.0	0.0
+TRAIL	Leave trail	1	BUTTON	Right Paddle	0	0.0	0.0

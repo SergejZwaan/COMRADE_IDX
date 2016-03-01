@@ -68,6 +68,7 @@ class Car{
   
   void speedControl(){
   
+      speed = js.get_Gas()*3;
       if(nettospeed < speed){
         nettospeed += acceleration;
       } else if(nettospeed> speed){
