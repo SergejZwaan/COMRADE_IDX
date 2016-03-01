@@ -20,12 +20,16 @@ class JoyStick {
   void run() {
     momoSteer = map(momo.getSlider("W").getValue(), -1, 1,-180, 180);
     gas = map(momo.getSlider("A").getValue(),1, -1,0, 1);
-    brake = momo.getSlider("B").getValue();
+    brake = map(momo.getSlider("B").getValue(),1, -1,0, 1);
     
 print("gas: " + gas + " - brake:  " + brake);
   }
   
   float get_Gas(){
     return gas;
+  }
+  
+  float get_Brake(){
+    return brake;
   }
 }

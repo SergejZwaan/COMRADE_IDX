@@ -31,7 +31,11 @@ class Car{
   
   
   void update(){
-    
+    if(drive){
+    speed = js.get_Gas()*2;
+    speed -= js.get_Brake()*4;
+    if(speed<0){speed = 0;}
+    }
     // speed manager
     speedControl();
    
@@ -68,11 +72,11 @@ class Car{
   
   void speedControl(){
   
-      speed = js.get_Gas()*3;
+      //speed = js.get_Gas()*3;
       if(nettospeed < speed){
         nettospeed += acceleration;
       } else if(nettospeed> speed){
-        nettospeed -= acceleration;
+        nettospeed -= acceleration * 2;
       }
   
   
