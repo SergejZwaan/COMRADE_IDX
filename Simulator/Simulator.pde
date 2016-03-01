@@ -17,6 +17,10 @@ import controlP5.*;         // Control P5 gui elements, can be deleted if not us
 import processing.opengl.*; // Open GL library for 3d rendering
 import processing.serial.*; // Serial library for communication with the COMRADE IDX PROTOTYPE
 
+import org.gamecontrolplus.gui.*;
+import org.gamecontrolplus.*;
+import net.java.games.input.*;
+
 /* 
 Define objects
 ---------------------------------------------------------------------------------------------
@@ -33,6 +37,13 @@ Serial myPort;             // Create object from Serial class
 SystemMonitor sm;
 Scenario DemoDay;
 Interface comrade;
+
+
+ControlIO control;
+ControlDevice stick;
+float px;
+
+
 
 PShape carShape;
 
@@ -53,11 +64,12 @@ boolean firstperson = false;        // first person view
 boolean startpathplanner = false;   // pathplanner
 boolean manualinput = true;         // manual input
 boolean serialavailable = true;     // serial device available
+boolean joystickavailable = false;
 boolean loadpreset = true;
 
 boolean startscreen = true;         // startscrien on
 boolean pathplannerscreen = false;         // startscrien on
-boolean keycontrol = false;
+boolean keycontrol = true;
 boolean update = false;
 
 PFont f;                    // Font variable
@@ -85,7 +97,8 @@ void setup() {
   carShape.rotateY(PI);
   carShape.rotateX(PI/2);
 
-  
+
+
 }
 
 void draw(){
@@ -94,7 +107,6 @@ void draw(){
   
   if(startscreen){  startgui.run();  }
   
-  
   DemoDay.run();
   c.run();
   gui();
@@ -102,10 +114,11 @@ void draw(){
   co.run();
   p.run();
   
-  sm.run(co.getSteerValue());// system monitor
+  //sm.run(co.getSteerValue());// system monitor
   
-  //if( controlState == 2 && serialavailable){  car.setSteer(co.getSteerValue());  }
-  car.setSteer(co.getSteerValue());
+  if( controlState == 2 && serialavailable){  car.setSteer(co.getSteerValue());  }
+  //car.setSteer(co.getSteerValue());
+  if( joystickavailable){car.setSteerJoyStick(px);}
   car.run();
   
   // manual drive
@@ -117,6 +130,12 @@ void draw(){
   if(controlState == 1){
      comrade.Set_Autonomous_Drive(); 
   }
+  
+  if( joystickavailable){
+  getUserInput(); // Polling
+  println(px);
+  }
+  
 }
 
 void mouseMoved(){
@@ -124,3 +143,7 @@ void mouseMoved(){
 }
 
 //TODO has to be made graphical
+
+public void getUserInput() {
+  px = map(stick.getSlider("X").getValue(), -1, 1,-180, 180);
+}
