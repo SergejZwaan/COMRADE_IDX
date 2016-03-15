@@ -11,6 +11,7 @@ static class options {
   // sprite configuration
   static int spriteSize = 3;
   static int spriteTrans = 3;
+  static float accelerationMult = 0.001;
 
   // sprite behaviour
   static int spriteSecurity = 10; // range from 0 to 10
