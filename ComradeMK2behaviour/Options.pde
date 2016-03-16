@@ -22,4 +22,7 @@ static class options {
   static int spriteRangeRight = 0;
   static int spriteRangeLeft = 0;
   static int spriteScatter = 0;
+  
+  static boolean inputGui = true;
+  static boolean inputComrade = false;
 }

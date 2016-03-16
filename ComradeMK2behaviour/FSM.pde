@@ -1,8 +1,8 @@
 class FSM{
 
    String state = "NULL";
-   String input = "NULL";
-   String lastinput;
+   String input, inputGUI, inputComrade, inputSimulator = "NULL";
+   String lastinput, lastinputgui, lastinputcomrade, lastinputsimulator;
    String laststate;
    
    // create behaviour object
@@ -15,7 +15,9 @@ class FSM{
    
    FSM(){
      println("System: FSM Activated");
-     lastinput = "NULL"; 
+     lastinputgui = "NULL";
+     lastinputcomrade = "NULL"; 
+     lastinputsimulator = "NULL"; 
      laststate = "NULL";
      behaviour = new Behaviours();
    }
@@ -24,17 +26,22 @@ class FSM{
      runFiniteStateMachine();
    }
    
-   void runFiniteStateMachine(){
+   boolean canDriveAutonomous(){
+     boolean output;
+     if(CanDrive > 75){output = true;} else{ output = false;}
+     return output;
+   }
    
+   // Finite state machine
+   void runFiniteStateMachine(){
+     
        // Switching states
        switch(state) {
         case "NULL": 
         
           behaviour.Execute_Null(state);
          
-          if       (input == "SETAUTO")    {  setState("AUTO");}
-          else if  (input == "SETMANUAL")  {  setState("MANUAL");}
-          else if  (input == "SETIDLE")    {  setState("IDLE");}
+          if  (input == "SETIDLE")    {  setState("IDLE");}
           else
           break;
           
@@ -43,9 +50,10 @@ class FSM{
          
           behaviour.Execute_Idle(state);
          
-          if       (input == "SETAUTO")       {setState("AUTO");}
-          else if  (input == "SETNULL")       {setState("NULL"); }
-          else if  (input == "SETMANUAL")     {setState("MANUAL");}
+          if       (input == "SETAUTO" && canDriveAutonomous())       {  setState("AUTO");}
+          else if  (input == "SETAUTO" && !canDriveAutonomous())      {  println("no switch possible");}
+          else if  (input == "SETNULL")       {  setState("NULL"); }
+          else if  (input == "SETMANUAL")     {  setState("MANUAL");}
           else
           break;
           
@@ -54,19 +62,21 @@ class FSM{
         
           behaviour.Execute_Auto(state);
           
-          if  (input == "SETMANUAL")  {  setState("MANUAL");}
-          else if  (input == "SETNULL")       {setState("NULL"); }
-          else if  (input == "SETIDLE")  {  setState("IDLE");}
+          if       (input == "SETMANUAL")     {  setState("MANUAL");}
+          else if  (input == "SETNULL")       {  setState("NULL"); }
+          else if  (input == "SETIDLE")       {  setState("IDLE");}
           else
           break;
           
           
         case "MANUAL": 
+        
           behaviour.Execute_Manual(state);
           
-          if       (input == "SETAUTO")    {  setState("AUTO");}
-          else if  (input == "SETNULL")       {setState("NULL"); }
-          else if  (input == "SETIDLE")  {  setState("IDLE");}
+          if       (input == "SETAUTO"  && canDriveAutonomous())       {  setState("AUTO");}
+          else if  (input == "SETAUTO"  && !canDriveAutonomous())       {  println("no switch possible");}
+          else if  (input == "SETNULL")       {  setState("NULL"); }
+          else if  (input == "SETIDLE")       {  setState("IDLE");}
           else 
           break;
         }
@@ -75,7 +85,7 @@ class FSM{
         
    }
    
-   
+   // state parser
    private void setState(String Input){
      // check state change
      if(Input != laststate){
@@ -83,16 +93,22 @@ class FSM{
      laststate = Input;
      println("fsm: set state to: " + state);
      }
-     
    }
    
    // input function
-   // filter for input changes
-  public void write(String FSMInput){
-    // if(FSMInput != lastinput){
-     input = FSMInput;
-     lastinput = FSMInput;
-    // }
-   } 
+  public void write(String Type, String FSMInput){
+    
+     // if input type is gui and input gui is true
+     if(Type == "gui" && options.inputGui == true){
+       input = FSMInput;
+       lastinput = FSMInput;
+     }
+     
+     // prototype input
+     else if(Type == "comrade" && options.inputComrade == true){
+       input = FSMInput;
+       lastinputcomrade = FSMInput;
+     }
+  } 
 
 }

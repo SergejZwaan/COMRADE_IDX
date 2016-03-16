@@ -4,7 +4,6 @@ class Behaviours{
     println("System: Behaviours Activated");
     }
     
-    
      void Execute_Null(String state){
       comrade.Set_State(state);
       comrade.Set_Target(options.locationMax/2);
@@ -26,7 +25,5 @@ class Behaviours{
       comrade.Set_State(state);
       comrade.Set_Target(options.locationMax/4*3);
     }
-
-
 
 }
