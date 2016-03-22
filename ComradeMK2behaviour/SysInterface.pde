@@ -18,7 +18,7 @@ class SysInterface{
        
        void displayGui(){
          fill(60);
-         rect(0,height/2,width,height/2);
+         rect(0,0,500,height);
        }
        
        

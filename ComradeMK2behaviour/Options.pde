@@ -6,12 +6,12 @@ static class options {
   // led strip configuration
   static int   ledSize       = 60; 
   static float locationMax   = 600.0;
-  static float locationMin   = 0.0;
+  static float locationMin   = 0.001;
 
   // sprite configuration
   static int spriteSize = 3;
   static int spriteTrans = 3;
-  static float accelerationMult = 0.001;
+  static float accelerationMult = 0.01;
 
   // sprite behaviour
   static int spriteSecurity = 10; // range from 0 to 10

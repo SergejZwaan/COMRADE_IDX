@@ -10,8 +10,6 @@ class FSM{
   
    // states
    // ----------------------------------------
-   // auto
-   // manual
    
    FSM(){
      println("System: FSM Activated");
@@ -37,32 +35,31 @@ class FSM{
      
        // Switching states
        switch(state) {
-        case "NULL": 
+         case "NULL": 
         
-          behaviour.Execute_Null(state);
-         
-          if  (input == "SETIDLE")    {  setState("IDLE");}
-          else
+          behaviour.execute(state, "RunState", null);
+                if  (input == "SETIDLE")    {  setState("IDLE");  }
+          else  if  (input == "SETAUTO")    {  setState("NULL");  }
+          else  if  (input == "SETMANUAL")  {  setState("NULL");  }
           break;
           
           
          case "IDLE": 
          
-          behaviour.Execute_Idle(state);
-         
-          if       (input == "SETAUTO" && canDriveAutonomous())       {  setState("AUTO");}
-          else if  (input == "SETAUTO" && !canDriveAutonomous())      {  println("no switch possible");}
-          else if  (input == "SETNULL")       {  setState("NULL"); }
-          else if  (input == "SETMANUAL")     {  setState("MANUAL");}
+          behaviour.execute(state, "RunState", null);
+               if  (input == "SETAUTO"   && system.CanDriveAutonomous())       {  setState           ("AUTO");             }
+          else if  (input == "SETAUTO"   && !system.CanDriveAutonomous())      {  behaviour.execute  (state, "RunAction" , "DENYSWITCHAUTO");    }
+          else if  (input == "SETNULL")                                        {  setState           ("NULL");             }
+          else if  (input == "SETMANUAL" && system.CanDriveManual())           {  setState           ("MANUAL");           }
+          else if  (input == "SETMANUAL" && !system.CanDriveManual())          {  println            ("no switch possible");}
           else
           break;
           
           
         case "AUTO": 
         
-          behaviour.Execute_Auto(state);
-          
-          if       (input == "SETMANUAL")     {  setState("MANUAL");}
+          behaviour.execute(state, "RunState", null);
+               if  (input == "SETMANUAL")     {  setState("MANUAL");}
           else if  (input == "SETNULL")       {  setState("NULL"); }
           else if  (input == "SETIDLE")       {  setState("IDLE");}
           else
@@ -71,17 +68,15 @@ class FSM{
           
         case "MANUAL": 
         
-          behaviour.Execute_Manual(state);
-          
-          if       (input == "SETAUTO"  && canDriveAutonomous())       {  setState("AUTO");}
-          else if  (input == "SETAUTO"  && !canDriveAutonomous())       {  println("no switch possible");}
+          behaviour.execute(state, "RunState", null);
+               if  (input == "SETAUTO"  && canDriveAutonomous())       {  setState("AUTO");}
+          else if  (input == "SETAUTO"  && !canDriveAutonomous())      {  behaviour.execute  (state, "RunAction" , "DENYSWITCHAUTO");  }
           else if  (input == "SETNULL")       {  setState("NULL"); }
           else if  (input == "SETIDLE")       {  setState("IDLE");}
           else 
           break;
         }
         
-        // perform skills
         
    }
    
@@ -97,7 +92,6 @@ class FSM{
    
    // input function
   public void write(String Type, String FSMInput){
-    
      // if input type is gui and input gui is true
      if(Type == "gui" && options.inputGui == true){
        input = FSMInput;
