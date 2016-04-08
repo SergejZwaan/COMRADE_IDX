@@ -4,6 +4,7 @@ class LightSystem {
   PVector location, velocity, acceleration, drag;
   String state;
   float target, brightblue, brightred, targetblue, targetred, bright, colorchangespeed, velocitylimit, dragc;
+  boolean stretch;
 
   // Object initialization
   LightSystem() {
@@ -14,6 +15,7 @@ class LightSystem {
     brightblue = 0.0; // start blue color
     brightred = 0.0;  // start red color
     velocitylimit = 3.0;
+    stretch = false;
   }
 
   void run() {
@@ -64,10 +66,13 @@ class LightSystem {
 
  // Return variable functions
  PVector get_Location() { return location; }
+ float get_Target_Location(){return target;}
  float get_Bright_Blue(){return brightblue;}
  float get_Bright_Red(){return brightred;}
+ boolean get_Stretch(){return stretch;}
   
  // set variable functions
+ void Set_Location(PVector Input){location = Input;}
  void Set_Velocity(PVector Input){velocity = Input;}
  void Set_State(String Input){state = Input;}
  void Set_Target(float Input){target = Input;}
@@ -79,4 +84,5 @@ class LightSystem {
  void Set_Color_Change_Speed(float Input){colorchangespeed = Input; }
  void Set_Velocity_Limit(float Input){velocitylimit = Input; }
  void Set_Drag(float Input){dragc = Input; }
+ void Set_stretch(boolean Input){stretch = Input;}
 }

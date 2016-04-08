@@ -23,6 +23,9 @@ static class options {
   static int spriteRangeLeft = 0;
   static int spriteScatter = 0;
   
+  // input rights
   static boolean inputGui = true;
   static boolean inputComrade = false;
+  static boolean inputSystem = true;
+  static boolean inputSimulator = false;
 }

@@ -1,11 +1,16 @@
-int buttonSize = 4;
+// public variables interface
+
+int buttonSize = 6;
 int buttonCheck = 0;
 int CanDrive = 100;
 int Radar = 100;
 int GPS = 100;
 int Speed = 100;
 boolean Rain , Snow, Dark = false;
+boolean Platoon , AHWay, Manouvre = false;
+boolean leftHand = true;
 
+String hwInput;
 
 boolean[] guiCheck = new boolean[buttonSize];
 
@@ -57,11 +62,9 @@ void setP5GUI() {
     
   // set sliders
   // overall candrive slider
-  cp5.addSlider("CanDrive")
-     .setPosition(20,260)
-     .setRange(0,100)
-     .setSize(460, 50)
-     ;
+
+
+
   
   // Scenario inputs
   // sliders
@@ -100,7 +103,32 @@ void setP5GUI() {
      .setPosition(260,395)
      .setSize(100,25)
      ;
+     
+   cp5.addToggle("Platoon")
+     .setPosition(20,435)
+     .setSize(100,25)
+     ;
+     
+  cp5.addToggle("AHWay")
+     .setPosition(140,435)
+     .setSize(100,25)
+     ;
+     
+  cp5.addToggle("Manouvre")
+     .setPosition(260,435)
+     .setSize(100,25)
+     ;
   
+  cp5.addToggle("leftHand")
+     .setPosition(20,535)
+     .setSize(100,25)
+     ;
+     
+  cp5.addToggle("rightHand")
+     .setPosition(140,535)
+     .setSize(100,25)
+     ;
+     
   for(int i = 0; i<buttonSize; i++){
     guiCheck[i] = false;
   }
@@ -109,6 +137,8 @@ void setP5GUI() {
   SetIdle();
   SetManual();
   SetAuto();
+  WantAuto();
+  WantManual();
 
   
   if((buttonCheck/2) == buttonSize){
@@ -146,4 +176,54 @@ public void SetAuto() {
     fsm.write("gui","SETAUTO");
   }
   else { buttonCheck++; }
+}
+
+public void WantAuto() {
+  if (guiCheck[4]) {
+    fsm.write("gui","SETWANTAUTO");
+    
+  }
+  else { buttonCheck++; }
+}
+
+public void WantManual() {
+  if (guiCheck[5]) {
+    fsm.write("gui","SETWANTMANUAL");
+    
+  }
+  else { buttonCheck++; }
+}
+
+void graphicalElements(){
+
+  graphicalTextElements();
+  graphicalCapElements();
+  
+  
+}
+
+void graphicalTextElements(){
+  //text
+  fill(0);
+  text("Can drive = " + system.getDriveAutoSum() , 50, 280);
+  text(" " + hwInput , 50,680,200,30);
+}
+
+void graphicalCapElements(){
+  boolean[] capsense = hw.getCap();
+  
+  pushMatrix();
+  translate(500,500);
+  int pos = 0;
+  for(int i = capsense.length-1; i > -1 ; i--){
+    if(capsense[i]){fill(255);}
+    else if(!capsense[i]){fill(0);}
+    rect(0 + 50 * pos ,0,30,100);
+    pos++;
+  }
+  
+  
+  popMatrix();
+
+
 }

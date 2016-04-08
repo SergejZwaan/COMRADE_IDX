@@ -2,7 +2,7 @@ class FSM{
 
    String state = "NULL";
    String input, inputGUI, inputComrade, inputSimulator = "NULL";
-   String lastinput, lastinputgui, lastinputcomrade, lastinputsimulator;
+   String lastinput, lastinputgui, lastinputcomrade, lastinputsystem, lastinputsimulator;
    String laststate;
    
    // create behaviour object
@@ -23,60 +23,82 @@ class FSM{
    void run(){
      runFiniteStateMachine();
    }
-   
-   boolean canDriveAutonomous(){
-     boolean output;
-     if(CanDrive > 75){output = true;} else{ output = false;}
-     return output;
-   }
-   
+
    // Finite state machine
    void runFiniteStateMachine(){
      
        // Switching states
        switch(state) {
          case "NULL": 
-        
-          behaviour.execute(state, "RunState", null);
+          behaviour.execute(state);
                 if  (input == "SETIDLE")    {  setState("IDLE");  }
           else  if  (input == "SETAUTO")    {  setState("NULL");  }
           else  if  (input == "SETMANUAL")  {  setState("NULL");  }
-          break;
+         break;
           
           
          case "IDLE": 
-         
-          behaviour.execute(state, "RunState", null);
+          behaviour.execute(state);
                if  (input == "SETAUTO"   && system.CanDriveAutonomous())       {  setState           ("AUTO");             }
-          else if  (input == "SETAUTO"   && !system.CanDriveAutonomous())      {  behaviour.execute  (state, "RunAction" , "DENYSWITCHAUTO");    }
           else if  (input == "SETNULL")                                        {  setState           ("NULL");             }
           else if  (input == "SETMANUAL" && system.CanDriveManual())           {  setState           ("MANUAL");           }
-          else if  (input == "SETMANUAL" && !system.CanDriveManual())          {  println            ("no switch possible");}
-          else
+          else if  (input == "SETMANUAL" && !system.CanDriveManual())          {  setState           ("IDLE");             }
+          
+          else if  (input == "SETMANUAL" && system.CanDriveManual() && !leftHand)          {  println("place hands on the steer");            }
+          else if  (input == "SETAUTO"   && system.CanDriveAutonomous() && !leftHand)      {  println("place hands on the steer");            }
           break;
-          
-          
+
         case "AUTO": 
-        
-          behaviour.execute(state, "RunState", null);
-               if  (input == "SETMANUAL")     {  setState("MANUAL");}
+          behaviour.execute(state);
+               if  (!system.CanDriveAutonomous()) {  setState("WANT_MANUAL");}
+          else if  (input == "SETMANUAL" &&  system.CanDriveManual() && leftHand)     {  setState("MANUAL");}
+          else if  (input == "SETMANUAL"  && !system.CanDriveManual())        {  behaviour.execute("DENYSWITCHMANUAL");  }
           else if  (input == "SETNULL")       {  setState("NULL"); }
           else if  (input == "SETIDLE")       {  setState("IDLE");}
+          else if  (input == "SETWANTMANUAL") {  setState("WANT_MANUAL");}
+          
+          
+          
+          else if  (input == "SETMANUAL" && system.CanDriveManual() && !leftHand)          {  println("place hands on the steer");            }
+         
+          
+          // maintain state
+          
+          break;
+
+        case "MANUAL": 
+          behaviour.execute(state);
+               if  (input == "SETAUTO"  && system.CanDriveAutonomous() && leftHand)       {  setState("AUTO");}
+          else if  (input == "SETAUTO"   && system.CanDriveAutonomous() && !leftHand)      {  println("place hands on the steer");            }
+          else if  (input == "SETAUTO"  && !system.CanDriveAutonomous())      {  behaviour.execute("DENYSWITCHAUTO"); }
+          else if  (input == "SETMANUAL"  && system.CanDriveManual())         {  setState("MANUAL");  }
+          else if  (input == "SETNULL")       {  setState("NULL"); }
+          else if  (input == "SETIDLE")       {  setState("IDLE");}
+          else if  (input == "SETWANTAUTO"  && system.CanDriveAutonomous())   {  setState("WANT_AUTO"); }
+          else if  (input == "SETWANTAUTO"  && !system.CanDriveAutonomous())   {  setState("MANUAL"); }
+          else if  (!system.CanDriveManual()) {  setState("WANT_AUTO");}
+          
+         
+          
+          break;
+
+        case "WANT_AUTO": 
+          behaviour.execute(state);
+          if  (input == "SETAUTO" )       { setState("AUTO"); }
+          else if  (system.CanDriveManual()) {  setState("MANUAL");}
+          break;
+          
+        case "WANT_MANUAL": 
+          behaviour.execute(state);
+          if  (input == "SETMANUAL")     { setState("MANUAL"); }
+          else if  (system.CanDriveAutonomous()) {  setState("AUTO");}
           else
           break;
           
-          
-        case "MANUAL": 
-        
-          behaviour.execute(state, "RunState", null);
-               if  (input == "SETAUTO"  && canDriveAutonomous())       {  setState("AUTO");}
-          else if  (input == "SETAUTO"  && !canDriveAutonomous())      {  behaviour.execute  (state, "RunAction" , "DENYSWITCHAUTO");  }
-          else if  (input == "SETNULL")       {  setState("NULL"); }
-          else if  (input == "SETIDLE")       {  setState("IDLE");}
-          else 
-          break;
+        case "nothing":
+        break;
         }
-        
+      
         
    }
    
@@ -102,6 +124,11 @@ class FSM{
      else if(Type == "comrade" && options.inputComrade == true){
        input = FSMInput;
        lastinputcomrade = FSMInput;
+     }
+     
+     else if(Type == "system" && options.inputSystem == true){
+       input = FSMInput;
+       lastinputsystem = FSMInput;
      }
   } 
 
