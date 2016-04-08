@@ -9,6 +9,7 @@ class System{
   
   void run(){
     Analyze_CanDrive();
+    Execute_HWInput();
     CanDrive = candriveAUTOsum;
   }
   
@@ -33,6 +34,22 @@ class System{
     if(Manouvre){candriveMANUALsum = 0;}
     
     
+  }
+  
+  void Execute_HWInput(){
+  
+    int[] swipeCounter = hw. getSwipeCounter();
+    
+    if(swipeCounter[0] > 20){
+      fsm.write("system","SETAUTO");
+    }
+    
+    if(swipeCounter[1] > 20){
+      fsm.write("system","SETMANUAL");
+    }
+  
+  
+  
   }
   
   boolean CanDriveAutonomous(){

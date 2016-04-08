@@ -1,16 +1,24 @@
 class HwInterface{
 
   boolean[] cap = new boolean[8];
+  PVector location;
+  PVector velocity;
   String input;
+  int leftcounter = 0;
+  int rightcounter = 0;
+  boolean switchInput = false;
+  int[] swipeCounter = new int[2];
   
   HwInterface(){
-  
+     location = new PVector(0.0,0.0);
+     velocity = new PVector(0.0,0.0);
      // reset cap sense value to false
      resetCap();
   }
   
   void run(){
     recieve_input();
+    calculate_sprite();
     
   }
   
@@ -34,7 +42,9 @@ class HwInterface{
           // identify no cap input
             if(message.equals("0000")){
               hwInput = "no cap input";
+              switchInput = false;
             }
+
           }
         }
       }
@@ -50,27 +60,92 @@ class HwInterface{
            if(pad > 0 && pad <= 8){
            cap[pad-1] = true;}
          }
+         if(cap[0] == true || cap[7] == true){
+           int counter = 0;
+           for(int i = 1; i < 7; i++){
+             if(cap[i] == false){
+               counter++;
+             }
+           }
+           if(counter == 6){
+           hwInput = "no cap input";
+           switchInput = false;
+           }
+         }
       }
-      println(cap);
-    }
-        
-
+      //println(cap);
+      
      
-   
+      
+    }
     
-   // println(cap);
+  void calculate_sprite(){
   
- 
+   float target = 0.0;
+      
+      if( hwInput != null && !hwInput.equals("no cap input")){
+        int pos = 0;
+        for(int i = 6; i > 0; i--){
+          if(cap[i] == true){
+            if(!switchInput){
+              location = new PVector(pos*50,0);
+              switchInput = true;
+            }else{
+              target = pos*50;  
+            }
+          }
+          pos++;
+        }
+      }
+      
+      if( hwInput != null && hwInput.equals("no cap input")){
+      target = 0.0;
+      location = new PVector(0,0);
+      switchInput = false;
+      leftcounter = 0;
+      rightcounter = 0;
+      }
+      
+      if(target > location.x){
+        velocity.x = 4.0;
+        rightcounter++;
+        leftcounter = 0;
+      } else if( target < location.x){
+        velocity.x = -4.0;
+        leftcounter++;
+        rightcounter= 0;
+      }
+      
+      if(abs((target) - location.x)< 0.2){
+        velocity.x = 0.0;
+      }
+      
+      location.add(velocity);
+  
+      println(leftcounter + " " + rightcounter);
+  
+  }
+        
+   // println(cap);
 
   void resetCap(){
       for( int i = 0; i<cap.length; i++){
        cap[i] = false;
      }
-  
   }
   
   boolean[] getCap(){
   return cap;
+  }
+  
+  PVector getLocation(){
+  return location;
+  }
+  
+  int[] getSwipeCounter(){
+    swipeCounter[0] = leftcounter;
+    swipeCounter[1] = rightcounter;
+    return swipeCounter;
   }
 
 }

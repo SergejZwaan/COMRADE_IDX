@@ -222,6 +222,10 @@ void graphicalCapElements(){
     pos++;
   }
   
+  PVector location = hw.getLocation();
+  fill(255);
+  ellipse(location.x, -20,10,10);
+  
   
   popMatrix();
 
