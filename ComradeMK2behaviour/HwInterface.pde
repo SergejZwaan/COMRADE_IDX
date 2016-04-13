@@ -18,6 +18,7 @@ class HwInterface{
   
   void run(){
     recieve_input();
+    send_output();
     calculate_sprite();
     
   }
@@ -29,6 +30,7 @@ class HwInterface{
     while (hwPort.available() > 0) {
       // read serial
       input = hwPort.readString();
+      println(input);
         // check if message is a full message
         if(input.length()>= 3 && input != null){
           //locate the end index
@@ -78,6 +80,16 @@ class HwInterface{
      
       
     }
+    
+    
+  void send_output(){
+      PVector location = comrade.get_Location();
+     // String message = str(location.x);
+      String message = nf(location.x, 4, 1);
+      hwPort.write(message + '\n');
+      println(message);
+     
+  }
     
   void calculate_sprite(){
   
