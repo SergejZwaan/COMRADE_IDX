@@ -16,7 +16,7 @@ HwInterface hw;
 
 PFont f;
 
-boolean hwConnected = true;
+boolean hwConnected = false;
 
 void setup(){
   size(1400,800);

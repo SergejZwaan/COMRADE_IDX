@@ -221,7 +221,7 @@ void graphicalCapElements(){
   boolean[] capsense = hw.getCap();
   
   pushMatrix();
-  translate(500,500);
+  translate(775,500);
   int pos = 0;
   for(int i = capsense.length-1; i > -1 ; i--){
     if(capsense[i]){fill(255);}

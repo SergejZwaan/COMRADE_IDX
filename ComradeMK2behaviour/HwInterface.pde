@@ -44,6 +44,7 @@ class HwInterface{
           // identify no cap input
             if(message.equals("0000")){
               hwInput = "no cap input";
+              resetCap();
               switchInput = false;
             }
 
@@ -57,7 +58,7 @@ class HwInterface{
       
       //int messageSize = hwInput.length();
       int messageSize = hwInput.indexOf('p');
-      println(messageSize);
+      //println(messageSize);
       if(messageSize > 0){
          resetCap();
          
@@ -76,7 +77,9 @@ class HwInterface{
            }
            if(counter == 6){
            hwInput = "no cap input";
+           
            switchInput = false;
+           
            }
          }
       }
