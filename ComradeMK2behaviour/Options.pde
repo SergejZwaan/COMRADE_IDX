@@ -28,4 +28,8 @@ static class options {
   static boolean inputComrade = false;
   static boolean inputSystem = true;
   static boolean inputSimulator = false;
+  
+  // swipe check
+  static int swipeCheckLeft = 20;
+  static int swipeCheckRight = 20;
 }

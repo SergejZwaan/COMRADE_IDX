@@ -38,13 +38,13 @@ class System{
   
   void Execute_HWInput(){
   
-    int[] swipeCounter = hw. getSwipeCounter();
+    int[] swipeCounter = hw.getSwipeCounter();
     
-    if(swipeCounter[0] > 20){
+    if(swipeCounter[0] > options.swipeCheckLeft){
       fsm.write("system","SETAUTO");
     }
     
-    if(swipeCounter[1] > 20){
+    if(swipeCounter[1] > options.swipeCheckRight){
       fsm.write("system","SETMANUAL");
     }
   

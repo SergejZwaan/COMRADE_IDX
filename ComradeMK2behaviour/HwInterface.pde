@@ -30,7 +30,7 @@ class HwInterface{
     while (hwPort.available() > 0) {
       // read serial
       input = hwPort.readString();
-      println(input);
+    //  println(input);
         // check if message is a full message
         if(input.length()>= 3 && input != null){
           //locate the end index
@@ -54,14 +54,19 @@ class HwInterface{
     }
     
     void analyze_input(){
-      int messageSize = hwInput.length();
+      
+      //int messageSize = hwInput.length();
+      int messageSize = hwInput.indexOf('p');
+      println(messageSize);
       if(messageSize > 0){
          resetCap();
-         for(int i = 0; i < messageSize; i++){
+         
+         for(int i = 0; i < messageSize+1; i++){
            int pad = int(hwInput.charAt(i))-48;
            if(pad > 0 && pad <= 8){
            cap[pad-1] = true;}
          }
+         
          if(cap[0] == true || cap[7] == true){
            int counter = 0;
            for(int i = 1; i < 7; i++){
@@ -86,8 +91,8 @@ class HwInterface{
       PVector location = comrade.get_Location();
      // String message = str(location.x);
       String message = nf(location.x, 4, 1);
-      hwPort.write(message + '\n');
-      println(message);
+      hwPort.write('i' + message + 'e');
+    //  println(message);
      
   }
     
@@ -134,7 +139,7 @@ class HwInterface{
       
       location.add(velocity);
   
-      println(leftcounter + " " + rightcounter);
+      //println(leftcounter + " " + rightcounter);
   
   }
         

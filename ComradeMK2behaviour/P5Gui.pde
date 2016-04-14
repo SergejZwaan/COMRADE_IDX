@@ -204,9 +204,17 @@ void graphicalElements(){
 
 void graphicalTextElements(){
   //text
-  fill(0);
-  text("Can drive = " + system.getDriveAutoSum() , 50, 280);
-  text(" " + hwInput , 50,680,200,30);
+  fill(255);
+  text("Can drive = " + system.getDriveAutoSum() , 40, 280);
+  
+ 
+ 
+  text("Arduino input = " + hwInput , 40,680,400,30);
+  
+  int[] swipeCounter = hw.getSwipeCounter();
+  
+  text("Swipe Left = " + swipeCounter[0] , 40,750,300,30);
+  text("Swipe Right = " + swipeCounter[1] , 240,750,300,30);
 }
 
 void graphicalCapElements(){

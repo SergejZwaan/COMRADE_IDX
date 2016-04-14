@@ -25,7 +25,8 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ80
 int capArray[8] = {0,0,0,0,0,0,0,0};;
 String output;
 String inputString ="";
-String input;
+String input = "";
+float inputLocation;
 boolean stringComplete = false;
 
 
@@ -42,20 +43,29 @@ output = "";
 
 //---------------------------
 if (stringComplete) {
-     //Serial.println(inputString);
-     // clear the string:
-     input = inputString;
+     
+     char firstChar = inputString[0];
+     char checkChar = 'i';
+     if (firstChar == checkChar){ 
+      int endchar = inputString.indexOf('e');
+      input = inputString.substring(1,endchar); 
+      inputLocation = input.toFloat();
+     }
      inputString = "";
      stringComplete = false;
-   }
+}
 
 
 //---------------------------
 run_cap();
 communication();
-
+         float ledlocation = inputLocation/1.8;
          for(int i=0;i<NUMPIXELS;i++){
-          pixels.setPixelColor(i, pixels.Color(0,0,0)); // Moderately bright green color.
+         float pixellocation = i * 10;
+         float bright = 255 - abs(ledlocation - pixellocation+1)*4;
+         if(bright < 0){ bright = 0;} 
+          
+          pixels.setPixelColor(i, pixels.Color(0,bright/2,bright)); // Moderately bright green color.
          }
 
        
@@ -71,7 +81,7 @@ void serialEvent() {
      inputString += inChar;
      // if the incoming character is a newline, set a flag
      // so the main loop can do something about it:
-     if (inChar == '\n') {
+     if (inChar == 'e') {
        stringComplete = true;
      }
    }

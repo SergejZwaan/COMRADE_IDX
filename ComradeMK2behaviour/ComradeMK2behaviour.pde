@@ -35,7 +35,7 @@ void setup(){
   setP5GUI();
   noStroke();
   
-  printArray(PFont.list());
+  //printArray(PFont.list());
   f = createFont("Arial", 24);
   textFont(f);
   

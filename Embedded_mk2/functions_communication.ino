@@ -16,7 +16,7 @@ void system_output(){
      message = "s" + output + "p" + input +  "n"; 
      //message = "p";
     }
-    delay(25);
+    delay(10);
     Serial.println(message);
   
   
@@ -25,12 +25,12 @@ void system_output(){
 
 void system_input(){
 
-  if (Serial.available() > 0) {
+ // if (Serial.available() > 0) {
                  // read the incoming byte:
-                 input = Serial.read();
+                // input = Serial.read();
                 // location = input.toFloat();
                  //Serial.println(location);
-         }
+        // }
 
   
   
