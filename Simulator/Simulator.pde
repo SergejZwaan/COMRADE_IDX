@@ -20,6 +20,7 @@ import processing.serial.*; // Serial library for communication with the COMRADE
 import org.gamecontrolplus.gui.*;
 import org.gamecontrolplus.*;
 import net.java.games.input.*;
+import processing.net.*;
 
 /* 
 Define objects
@@ -37,10 +38,15 @@ Serial myPort;             // Create object from Serial class
 SystemMonitor sm;
 Scenario DemoDay;
 Interface comrade;
+SwInterface sw;
 
-
+Client Comrade_Client;
 ControlIO control;
 ControlDevice stick;
+
+String Server_Input;
+int Server_Data;
+
 float px;
 
 
@@ -63,7 +69,7 @@ boolean firstperson = false;        // first person view
 
 boolean startpathplanner = false;   // pathplanner
 boolean manualinput = true;         // manual input
-boolean serialavailable = true;     // serial device available
+boolean serialavailable = false;     // serial device available
 boolean joystickavailable = false;
 boolean loadpreset = true;
 
@@ -82,7 +88,7 @@ Create program setup
 
 void setup() {
   size(1600,800,P3D);
-  
+  Comrade_Client = new Client(this, "127.0.0.1", 100); // Replace with your server's IP and port
   // initialization
   initialize_serial(serialavailable); // Initialize the serial connection 
   initialize_objects();               // Initialize the objects
@@ -106,7 +112,7 @@ void draw(){
   lights();
   
   if(startscreen){  startgui.run();  }
-  
+  sw.run();
   DemoDay.run();
   c.run();
   gui();

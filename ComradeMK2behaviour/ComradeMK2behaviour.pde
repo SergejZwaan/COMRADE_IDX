@@ -1,5 +1,6 @@
 import controlP5.*;
 import processing.serial.*;
+import processing.net.*;
 
 ControlP5 cp5;
 Slider abc;
@@ -13,15 +14,22 @@ LightSystem comrade;
 SysInterface systeminterface;
 System system;
 HwInterface hw;
+SwInterface sw;
+
+Server Comrade_Server;
+Client Comrade_Client;
+
+String Comrade_Client_Input;
+int Comrade_Client_Data[];
 
 PFont f;
 
-boolean hwConnected = false;
+boolean hwConnected = true;
 
 void setup(){
   size(1400,800);
   
-  
+  Comrade_Server = new Server(this, 100); // Start a simple server on a port
   if(hwConnected){hwPort = new Serial(this, Serial.list()[0], 9600);}
   
   
@@ -32,6 +40,8 @@ void setup(){
   system = new System();
   cp5 = new ControlP5(this);
   hw = new HwInterface();
+  sw = new SwInterface();
+  
   setP5GUI();
   noStroke();
   
@@ -49,6 +59,7 @@ void draw(){
   display.run();
   fsm.run();
   if(hwConnected){hw.run();}
+  sw.run();
   systeminterface.displayGui();
   graphicalElements();
 }

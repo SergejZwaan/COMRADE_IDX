@@ -21,7 +21,7 @@ void initialize_objects(){
   DemoDay = new Scenario();
   sm = new SystemMonitor();
   comrade = new Interface();
-
+  sw = new SwInterface();
 
 
 }

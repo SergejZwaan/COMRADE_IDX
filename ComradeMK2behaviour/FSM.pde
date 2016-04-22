@@ -131,5 +131,11 @@ class FSM{
        lastinputsystem = FSMInput;
      }
   } 
+  
+  public String getState(){
+   
+    return state;
+  
+  }
 
 }

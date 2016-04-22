@@ -32,9 +32,6 @@ void system_input(){
                  //Serial.println(location);
         // }
 
-  
-  
-  
   }
 
 

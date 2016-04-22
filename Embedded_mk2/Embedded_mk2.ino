@@ -16,11 +16,13 @@
 #define CAP1188_MISO  12
 #define CAP1188_CLK  13
 
-#define PIN            6
+#define PIN1            6
+#define PIN2           9
 #define NUMPIXELS      19
 
 Adafruit_CAP1188 cap = Adafruit_CAP1188();
-Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel SteerPixels = Adafruit_NeoPixel(NUMPIXELS, PIN1, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel DashPixels = Adafruit_NeoPixel(NUMPIXELS, PIN2, NEO_GRB + NEO_KHZ800);
 
 int capArray[8] = {0,0,0,0,0,0,0,0};;
 String output;
@@ -33,7 +35,8 @@ boolean stringComplete = false;
 void setup() {
   Serial.begin(9600);
   init_cap();
-  pixels.begin(); // This initializes the NeoPixel library.
+  SteerPixels.begin(); // This initializes the NeoPixel library.
+  DashPixels.begin(); // This initializes the NeoPixel library.
   inputString.reserve(200);
 
 }
@@ -65,12 +68,13 @@ communication();
          float bright = 255 - abs(ledlocation - pixellocation+1)*4;
          if(bright < 0){ bright = 0;} 
           
-          pixels.setPixelColor(i, pixels.Color(0,bright/2,bright)); // Moderately bright green color.
+          SteerPixels.setPixelColor(i, SteerPixels.Color(0,bright/2,bright)); // Moderately bright green color.
+          DashPixels.setPixelColor(i, SteerPixels.Color(0,255/2,255)); // Moderately bright green color.
          }
 
        
-pixels.show(); 
-
+SteerPixels.show(); 
+DashPixels.show(); 
 }
 
 void serialEvent() {
