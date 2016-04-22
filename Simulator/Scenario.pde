@@ -18,7 +18,7 @@ class Scenario{
     translate(0,0,5);
     draw_road();
     draw_buildings();
-    scenario1();
+   // scenario1();
     popMatrix();
     }
     

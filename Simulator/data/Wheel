@@ -1,0 +1,4 @@
+Wheel
+W	Wheel	3	SLIDER	Wheel axis	0	1.0	0.0
+A	Accelerator	3	SLIDER	Accelerator	0	1.0	0.0
+B	Brake	3	SLIDER	Brake	0	1.0	0.0

@@ -38,6 +38,7 @@ Serial myPort;             // Create object from Serial class
 SystemMonitor sm;
 Scenario DemoDay;
 Interface comrade;
+<<<<<<< HEAD
 SwInterface sw;
 
 Client Comrade_Client;
@@ -48,9 +49,17 @@ String Server_Input;
 int Server_Data;
 
 float px;
+=======
+JoyStick js;
+
+
+ControlIO control; // Joystick control
+ControlDevice momo; // Logitech steer
+>>>>>>> logitech
 
 
 
+float momoSteer;
 PShape carShape;
 
 
@@ -70,7 +79,11 @@ boolean firstperson = false;        // first person view
 boolean startpathplanner = false;   // pathplanner
 boolean manualinput = true;         // manual input
 boolean serialavailable = false;     // serial device available
+<<<<<<< HEAD
 boolean joystickavailable = false;
+=======
+boolean joystickavailable = true;   // youstick variable
+>>>>>>> logitech
 boolean loadpreset = true;
 
 boolean startscreen = true;         // startscrien on
@@ -87,24 +100,21 @@ Create program setup
 */
 
 void setup() {
+  // window configuration
   size(1600,800,P3D);
+<<<<<<< HEAD
   Comrade_Client = new Client(this, "127.0.0.1", 100); // Replace with your server's IP and port
+=======
+   control = ControlIO.getInstance(this);// Initialise the ControlIO
+   momo = control.getMatchedDevice("Wheel");// Find a device that matches the configuration file
+>>>>>>> logitech
   // initialization
   initialize_serial(serialavailable); // Initialize the serial connection 
   initialize_objects();               // Initialize the objects
-
-  // startscreen font
-  f = createFont("Arial", 24);        // Initialize font
-  textFont(f);
-  
-  // configurate car shape
-  carShape = loadShape("comradecar1.obj");
-  carShape.scale(5);
-  carShape.rotateY(PI);
-  carShape.rotateX(PI/2);
-
-
-
+  initialize_carShape();
+  initialize_typo();
+  if(joystickavailable){   initialize_joyStick();  }
+ 
 }
 
 void draw(){
@@ -112,19 +122,22 @@ void draw(){
   lights();
   
   if(startscreen){  startgui.run();  }
+<<<<<<< HEAD
   sw.run();
+=======
+>>>>>>> logitech
   DemoDay.run();
   c.run();
   gui();
   g.run();
   co.run();
   p.run();
-  
+  js.run();
   //sm.run(co.getSteerValue());// system monitor
   
   if( controlState == 2 && serialavailable){  car.setSteer(co.getSteerValue());  }
   //car.setSteer(co.getSteerValue());
-  if( joystickavailable){car.setSteerJoyStick(px);}
+  if( joystickavailable){car.setSteerJoyStick(momoSteer);}
   car.run();
   
   // manual drive
@@ -139,8 +152,9 @@ void draw(){
   
   if( joystickavailable){
   getUserInput(); // Polling
-  println(px);
+  println(momoSteer);
   }
+  
   
 }
 
@@ -149,7 +163,6 @@ void mouseMoved(){
 }
 
 //TODO has to be made graphical
-
 public void getUserInput() {
-  px = map(stick.getSlider("X").getValue(), -1, 1,-180, 180);
+  
 }
