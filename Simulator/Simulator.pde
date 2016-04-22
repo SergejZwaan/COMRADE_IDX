@@ -38,24 +38,24 @@ Serial myPort;             // Create object from Serial class
 SystemMonitor sm;
 Scenario DemoDay;
 Interface comrade;
-<<<<<<< HEAD
+
 SwInterface sw;
 
 Client Comrade_Client;
-ControlIO control;
+
 ControlDevice stick;
 
 String Server_Input;
 int Server_Data;
 
 float px;
-=======
+
 JoyStick js;
 
 
 ControlIO control; // Joystick control
 ControlDevice momo; // Logitech steer
->>>>>>> logitech
+
 
 
 
@@ -79,11 +79,9 @@ boolean firstperson = false;        // first person view
 boolean startpathplanner = false;   // pathplanner
 boolean manualinput = true;         // manual input
 boolean serialavailable = false;     // serial device available
-<<<<<<< HEAD
-boolean joystickavailable = false;
-=======
+
 boolean joystickavailable = true;   // youstick variable
->>>>>>> logitech
+
 boolean loadpreset = true;
 
 boolean startscreen = true;         // startscrien on
@@ -102,12 +100,11 @@ Create program setup
 void setup() {
   // window configuration
   size(1600,800,P3D);
-<<<<<<< HEAD
+
   Comrade_Client = new Client(this, "127.0.0.1", 100); // Replace with your server's IP and port
-=======
    control = ControlIO.getInstance(this);// Initialise the ControlIO
    momo = control.getMatchedDevice("Wheel");// Find a device that matches the configuration file
->>>>>>> logitech
+
   // initialization
   initialize_serial(serialavailable); // Initialize the serial connection 
   initialize_objects();               // Initialize the objects
@@ -122,10 +119,9 @@ void draw(){
   lights();
   
   if(startscreen){  startgui.run();  }
-<<<<<<< HEAD
+
   sw.run();
-=======
->>>>>>> logitech
+
   DemoDay.run();
   c.run();
   gui();

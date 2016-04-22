@@ -21,12 +21,9 @@ void initialize_objects(){
   DemoDay = new Scenario();
   sm = new SystemMonitor();
   comrade = new Interface();
-<<<<<<< HEAD
   sw = new SwInterface();
-=======
   js = new JoyStick();
 
->>>>>>> logitech
 
 
 }
