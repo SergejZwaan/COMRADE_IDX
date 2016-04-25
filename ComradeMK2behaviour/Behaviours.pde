@@ -49,7 +49,7 @@ class Behaviours {
       
         comrade.Set_State(state);
         comrade.Set_Target(options.locationMax/4);
-        comrade.Set_Velocity_Limit(3.0);
+        comrade.Set_Velocity_Limit(6.0);
         comrade.Set_Drag(0.02);
         comrade.Set_Target_Red(0.0);
         comrade.Set_Target_Blue(255.0);
@@ -61,10 +61,10 @@ class Behaviours {
       // run when state is manual
       
         comrade.Set_State(state);
-        comrade.Set_Target(options.locationMax/4*3);
+        comrade.Set_Target(options.locationMax/4*3.5);
         comrade.Set_Target_Red(0.0);
         comrade.Set_Target_Blue(255.0);
-        comrade.Set_Velocity_Limit(3.0);
+        comrade.Set_Velocity_Limit(6.0);
         comrade.Set_Drag(0.02);
       break;
      

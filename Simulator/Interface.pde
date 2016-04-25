@@ -1,25 +1,22 @@
 class Interface{
 
   Interface(){
-  
   }
   
   void Set_Manual_Drive(){
-      autopilot = false;
-      manualinput = true;
-      car.applyForce(new PVector(0,0));
-      p.resetPathPlanner();
-      startpathplanner = false;
-  
+      autopilot = false; // turn of autopilot
+      manualinput = true; // turn on keyboard input
+      car.applyForce(new PVector(0,0)); // apply no force
+      p.resetPathPlanner();  // reset path planner
+      startpathplanner = false; // stop running pathplanner
   }
   
   void Set_Autonomous_Drive(){
-      manualinput = false;
-      car.resetTheta();
-      autopilot = true;
-      p.startAutonomousDriving(autopilot);
-      startpathplanner = true;
-      controlState = 1;
+      manualinput = false; // manual input is false
+      car.resetTheta(); // reset the car steering angle
+      autopilot = true; // set autopilot true
+      p.startAutonomousDriving(autopilot); // start autopilot
+      startpathplanner = true; // start pathplanner
   }
 
 
@@ -36,10 +33,12 @@ void gui(){
     } if (key == 's'){
       if( start == false){
       car.setDriveStatus(true);
+      start = true;
       println("start car");
       }
       else{
       car.setDriveStatus(false);
+      start = false;
       println("stop car");
       }
     }if (key == 'q'){
@@ -58,23 +57,17 @@ void gui(){
        startscreen = true;
        startpathplanner = false;
     } if (key == 'o'){
-      // set autopilot false
-      // set manual drive true
-      autopilot = false;
-      manualinput = true;
-      //car.applyForce(new PVector(0,0));
-      car.resetTheta();
-      startpathplanner = false;
-      controlState = 2;
-    }if (key == 'p'){
-      // set autopilot true
-      // set manual drive false
+      comrade.Set_Manual_Drive();
+    } if (key == 'p'){
+      comrade.Set_Autonomous_Drive();
       
     }if (key == 'z'){
       update = true;
       
     }if (key == 'a'){
       update = false;
+    }if (key == 'r'){
+      car.reset();
     }
     
     

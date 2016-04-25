@@ -13,10 +13,11 @@ void system_output(){
     if(output.length() < 1){
      message = "s" + zero + "n";
     }else{
-     message = "s" + output + "p" + input +  "n"; 
+    // message = "s" + output + "p" + systemInput +  "n"; 
+     message = "s" + output + "p" + 0 + "n";
      //message = "p";
     }
-    delay(10);
+    delay(5);
     Serial.println(message);
   
   

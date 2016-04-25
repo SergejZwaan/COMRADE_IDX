@@ -69,6 +69,8 @@ class LightSystem {
  float get_Target_Location(){return target;}
  float get_Bright_Blue(){return brightblue;}
  float get_Bright_Red(){return brightred;}
+ float get_target_Red(){return targetred;}
+ float get_target_Blue(){return targetblue;}
  boolean get_Stretch(){return stretch;}
   
  // set variable functions

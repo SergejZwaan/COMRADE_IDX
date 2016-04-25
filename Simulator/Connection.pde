@@ -24,12 +24,9 @@ class Connection{
        
         //println(initial);
           if( initial.equals("start")){
-          
            steervalue = message.substring(7,message.indexOf('b'));
            control = message.substring(message.indexOf('b')+1,message.indexOf('/'));
-          
-          
-          controlState = int(control);
+           controlState = int(control);
           }
         }
      

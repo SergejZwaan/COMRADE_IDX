@@ -28,8 +28,20 @@ int capArray[8] = {0,0,0,0,0,0,0,0};;
 String output;
 String inputString ="";
 String input = "";
-float inputLocation;
+float inputLocation = 0.0;
+float nettoLocation = 0.0;
 boolean stringComplete = false;
+
+int brightBlue[(NUMPIXELS * 2)];
+int brightRed[(NUMPIXELS * 2)];
+
+int blueTarget = 0;
+int redTarget = 0;
+
+int blueNetto = 0;
+int redNetto = 0;
+
+String systemInput;
 
 
 void setup() {
@@ -46,13 +58,21 @@ output = "";
 
 //---------------------------
 if (stringComplete) {
-     
+     systemInput = inputString;
      char firstChar = inputString[0];
      char checkChar = 'i';
+     String red, blue;
+     
      if (firstChar == checkChar){ 
-      int endchar = inputString.indexOf('e');
-      input = inputString.substring(1,endchar); 
+      int endchar1 = inputString.indexOf('b');
+      int endchar2 = inputString.indexOf('r');
+      int endchar3 = inputString.indexOf('e');
+      input = inputString.substring(1,endchar1); 
+      blue = inputString.substring(endchar1 + 1, endchar2);
+      red = inputString.substring(endchar2+1, endchar3);
       inputLocation = input.toFloat();
+      blueTarget = blue.toInt();
+      redTarget = red.toInt();
      }
      inputString = "";
      stringComplete = false;
@@ -62,15 +82,28 @@ if (stringComplete) {
 //---------------------------
 run_cap();
 communication();
-         float ledlocation = inputLocation/1.8;
-         for(int i=0;i<NUMPIXELS;i++){
-         float pixellocation = i * 10;
-         float bright = 255 - abs(ledlocation - pixellocation+1)*4;
-         if(bright < 0){ bright = 0;} 
-          
-          SteerPixels.setPixelColor(i, SteerPixels.Color(0,bright/2,bright)); // Moderately bright green color.
-          DashPixels.setPixelColor(i, SteerPixels.Color(0,255/2,255)); // Moderately bright green color.
+colorSmoother();
+locationSmoother();
+         float ledlocation = nettoLocation/1.9;
+         for(int i=0;i<(NUMPIXELS*2);i++){
+               float pixellocation = i * 10;
+               float brightb = blueNetto - abs(ledlocation - pixellocation+1)*4;
+               float brightr = redNetto - abs(ledlocation - pixellocation+1)*4;
+               if(brightb < 0){ brightb = 0;} 
+               if(brightr < 0){ brightr = 0;} 
+               brightBlue[i]= brightb;
+               brightRed[i]= brightr;
          }
+
+         for(int i = 0; i<NUMPIXELS; i++){
+            SteerPixels.setPixelColor(i, SteerPixels.Color(brightRed[i],brightBlue[i]/2,brightBlue[i])); // Moderately bright green color.
+         }
+
+         for(int i = 0; i <NUMPIXELS; i++){
+            DashPixels.setPixelColor(i,SteerPixels.Color(brightRed[i+ NUMPIXELS],brightBlue[i+ NUMPIXELS]/2,brightBlue[i+ NUMPIXELS])); // Moderately bright green color.
+         }
+
+
 
        
 SteerPixels.show(); 
@@ -87,9 +120,27 @@ void serialEvent() {
      // so the main loop can do something about it:
      if (inChar == 'e') {
        stringComplete = true;
+       //Serial.flush();
      }
    }
 }
+
+void colorSmoother(){
+  if(blueTarget > blueNetto){blueNetto+=2;}
+  if(blueTarget < blueNetto){blueNetto-=2;}
+  if(redTarget > redNetto){redNetto+=2;}
+  if(redTarget < redNetto){redNetto-=2;}
+  }
+
+void locationSmoother(){
+  if(inputLocation > nettoLocation){
+    nettoLocation += ((inputLocation-nettoLocation)/10);
+    }
+    if(inputLocation < nettoLocation){
+    nettoLocation -= ((nettoLocation-inputLocation)/10);
+    }
+  
+  }
 
 
 

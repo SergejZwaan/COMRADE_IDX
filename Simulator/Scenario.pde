@@ -81,7 +81,7 @@ class Scenario{
         pushMatrix();
         translate(250 + i*220,250,-150);
         fill(255);
-        box(120,80,350);
+        box(120,80,150);
         popMatrix();
         }
         
@@ -89,7 +89,7 @@ class Scenario{
         pushMatrix();
         translate(250 + i*220,550,-150);
         fill(255);
-        box(80,120,350);
+        box(80,120,150);
         popMatrix();
         }
         
@@ -99,7 +99,7 @@ class Scenario{
         pushMatrix();
         translate(200 + i*240,0,-150);
         fill(255);
-        box(200,80,350);
+        box(200,80,150);
         popMatrix();
         }
         
@@ -109,7 +109,7 @@ class Scenario{
         pushMatrix();
         translate(200 + i*240,gridHeight,-150);
         fill(255);
-        box(200,80,350);
+        box(200,80,150);
         popMatrix();
         }
   }

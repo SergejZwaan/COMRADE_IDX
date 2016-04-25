@@ -78,9 +78,9 @@ boolean firstperson = false;        // first person view
 
 boolean startpathplanner = false;   // pathplanner
 boolean manualinput = true;         // manual input
-boolean serialavailable = false;     // serial device available
 
-boolean joystickavailable = true;   // youstick variable
+boolean serialavailable = false;     // serial device available
+boolean joystickavailable = false;   // youstick variable
 
 boolean loadpreset = true;
 
@@ -102,8 +102,8 @@ void setup() {
   size(1600,800,P3D);
 
   Comrade_Client = new Client(this, "127.0.0.1", 100); // Replace with your server's IP and port
-   control = ControlIO.getInstance(this);// Initialise the ControlIO
-   momo = control.getMatchedDevice("Wheel");// Find a device that matches the configuration file
+ //  control = ControlIO.getInstance(this);// Initialise the ControlIO
+ //  momo = control.getMatchedDevice("Wheel");// Find a device that matches the configuration file
 
   // initialization
   initialize_serial(serialavailable); // Initialize the serial connection 
@@ -111,7 +111,7 @@ void setup() {
   initialize_carShape();
   initialize_typo();
   if(joystickavailable){   initialize_joyStick();  }
- 
+   //scale(5);
 }
 
 void draw(){
@@ -121,44 +121,23 @@ void draw(){
   if(startscreen){  startgui.run();  }
 
   sw.run();
-
   DemoDay.run();
   c.run();
   gui();
   g.run();
   co.run();
   p.run();
-  js.run();
-  //sm.run(co.getSteerValue());// system monitor
-  
-  if( controlState == 2 && serialavailable){  car.setSteer(co.getSteerValue());  }
-  //car.setSteer(co.getSteerValue());
-  if( joystickavailable){car.setSteerJoyStick(momoSteer);}
+  if(joystickavailable){js.run();}
+  if( controlState == 2 && serialavailable){  car.setSteer(co.getSteerValue()); }
+  if( joystickavailable){car.setSteerJoyStick(momoSteer);} 
   car.run();
   
   // manual drive
-  if(controlState == 2){
-      comrade.Set_Manual_Drive();
-  } 
-  
+  if(controlState == 2){ comrade.Set_Manual_Drive();} 
   // autonomous drive
-  if(controlState == 1){
-     comrade.Set_Autonomous_Drive(); 
-  }
-  
-  if( joystickavailable){
-  getUserInput(); // Polling
-  println(momoSteer);
-  }
-  
-  
+  if(controlState == 1){comrade.Set_Autonomous_Drive();}
 }
 
 void mouseMoved(){
   p.checkmouseMoved();
-}
-
-//TODO has to be made graphical
-public void getUserInput() {
-  
 }

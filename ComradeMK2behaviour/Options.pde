@@ -30,6 +30,6 @@ static class options {
   static boolean inputSimulator = false;
   
   // swipe check
-  static int swipeCheckLeft = 20;
-  static int swipeCheckRight = 20;
+  static int swipeCheckLeft = 10;
+  static int swipeCheckRight = 10;
 }

@@ -94,7 +94,9 @@ class HwInterface{
       PVector location = comrade.get_Location();
      // String message = str(location.x);
       String message = nf(location.x, 4, 1);
-      hwPort.write('i' + message + 'e');
+      int bluetarget = int(comrade.get_target_Blue());
+      int redtarget = int(comrade.get_target_Red());
+      hwPort.write('i' + message + 'b' + bluetarget + 'r' + redtarget + 'e');
     //  println(message);
      
   }
