@@ -29,6 +29,10 @@ class Camera {
     case "SHOWCASE":
       showcase_View();
       break;
+      
+     case "PATHPLANNER":
+      top_View();
+      break;
 
     default:
       top_View();

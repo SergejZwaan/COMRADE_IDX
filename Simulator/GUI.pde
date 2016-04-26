@@ -14,15 +14,21 @@ class GUI{
   }
   
   void GUI_FSM(){
-    
     switch(guiState){
       case "STARTSCREEN":
           startgui.run();
+          c.set_Perspective("GUI");
       break;
       case "SIMULATOR":
           c.set_Perspective("SIMULATOR");
           pathplannerscreen = false;
       break;
+      
+      case "PATHPLANNER":
+          c.set_Perspective("PATHPLANNER");
+          pathplannerscreen = true;
+      break;
+      
       
       default:
       
@@ -56,20 +62,14 @@ class GUI{
       println("stop car");
       }
     }if (key == 'q'){
-     c.set_Perspective("SIMULATOR");
+     set_GUI_State("SIMULATOR");
      startscreen = false;
      pathplannerscreen = false;
     } if (key == 'w'){
       firstperson = false;
       //endCamera();
-    }if (key == 'x' && startscreen == false) {
-      println("shift");
-       autopilot = false;
-       start = false;
-       firstperson = false;
-       startscreen = true;
-       startpathplanner = false;
-       c.set_Perspective("GUI");
+    }if (key == 'x' ) {
+      set_GUI_State("STARTSCREEN");
     } if (key == 'o'){
       comrade.Set_Manual_Drive();
     } if (key == 'p'){
