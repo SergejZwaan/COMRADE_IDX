@@ -6,7 +6,6 @@ class StartScreen{
 
   // RUN ALL THE FUNCTIONS
   void run(){
-  
       pushMatrix();
       translate(0,0,5);
       draw_screen();
@@ -16,11 +15,9 @@ class StartScreen{
       draw_PathPlannerButton((width/5)*3,height/2-100,200,200);
       draw_ScenarioPlannerButton((width/5)*4,height/2-100,200,200);
       popMatrix();
-  
   }
   
   void draw_screen(){
-    
       fill(30);
       rect(0,0,width,height);
   }
@@ -33,22 +30,13 @@ class StartScreen{
     rect(x,y,w,h);
     fill(0);
     text("Simulator", x+10, y+20);
-    
      if (mousePressed == true ) {
        if(mouseX < (x+w) && mouseX > x){
          if(mouseY < ( y+w) && mouseY > y){
-            // code for mousepressed 
-           println("button run simulator pressed");
-           startscreen = false;
-           firstperson = true;
-           
-           pathplannerscreen = false;
-           
+           gui.set_GUI_State("SIMULATOR");
             }
          }
       }
-  
-  
   }
   
   
@@ -63,12 +51,7 @@ class StartScreen{
            if(mouseX < (x+w) && mouseX > x){
              if(mouseY < ( y+w) && mouseY > y){
                 // code for mousepressed 
-               println("button run pathplanner pressed");
-               startscreen = false;
-               firstperson = false;
-               startpathplanner = true;
-               pathplannerscreen = true;
-              
+               gui.set_GUI_State("PATHPLANNER");
                 }
              }
           }

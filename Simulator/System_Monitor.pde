@@ -12,10 +12,8 @@ SystemMonitor(){
   table.addColumn("Serial Available");
   table.addColumn("Steer Value");
   table.addColumn("Control State");
-  
   TableRow newRow = table.addRow();
   newRow.setFloat("Steer Value", steer);
-  
 }
 
 

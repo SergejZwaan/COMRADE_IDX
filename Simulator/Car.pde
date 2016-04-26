@@ -71,7 +71,9 @@ class Car{
       if(joystickavailable){speed = js.get_Gas()*3;}
       else{speed = 1.0;}
         if(dAngle < 1){
-       speed -= dAngle/1.5;}
+       speed -= dAngle/1.7;}else{
+         theta = 0.0;
+       }
       
       if(nettospeed < speed){
         nettospeed += acceleration;
@@ -88,14 +90,23 @@ class Car{
       translate(location.x,location.y,-5);
       rotate(angle);
       //rotate(angle/10);
-     rotate(theta/10);
+     //rotate(theta/10); // tODo fix
       strokeWeight(1);
       fill(255);
       stroke(0);
       rotate(PI);
    
       translate(-30, -10,0);
-      shape(carShape,10,10);
+      if(c.get_Perspective() != "SIMULATOR"){shape(carShape,10,10);}
+    popMatrix();
+    
+    pushMatrix();
+       
+         
+         translate(location.x,location.y,-80);
+         rotate(angle);
+         if(c.get_Perspective() == "SIMULATOR"){shape(dash, 12, 38, 25, 120);}
+        
     popMatrix();
     
     
@@ -161,6 +172,7 @@ void resetTheta(){
 void applyForce(PVector inforce){force = inforce;}
 void setDriveStatus(boolean drivestatus){drive = drivestatus;}
 void setSpeed(float input){speed = input;}
+
 void reset(){
   velocity = new PVector(0.0,0.0);
   location = new PVector(0.0,0.0);

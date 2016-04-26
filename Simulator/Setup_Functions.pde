@@ -15,15 +15,14 @@ void initialize_objects() {
   c = new Camera();
   p = new PathPlanner();
   car = new Car();
-  startgui = new StartScreen();
+  
   co = new Connection();
   DemoDay = new Scenario();
   sm = new SystemMonitor();
   comrade = new Interface();
   sw = new SwInterface();
-  if (joystickavailable) {  
-    js = new JoyStick();
-  }
+  gui = new GUI();
+  if (joystickavailable) {js = new JoyStick();}
 }
 
 void initialize_carShape() {

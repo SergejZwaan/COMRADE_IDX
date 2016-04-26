@@ -16,7 +16,6 @@ Importing libraries
 import controlP5.*;         // Control P5 gui elements, can be deleted if not used
 import processing.opengl.*; // Open GL library for 3d rendering
 import processing.serial.*; // Serial library for communication with the COMRADE IDX PROTOTYPE
-
 import org.gamecontrolplus.gui.*;
 import org.gamecontrolplus.*;
 import net.java.games.input.*;
@@ -32,33 +31,24 @@ Grid g;                    // Create object from grid class
 Camera c;                  // Create object from Camera class
 PathPlanner p;             // Create object from pathplanner clasp111
 Car car;                   // Create object from car clas
-StartScreen startgui;      // Create object from StartScreen class, main gui
+
 Connection co;             // Create object from connection class
 Serial myPort;             // Create object from Serial class
+GUI gui;
 SystemMonitor sm;
 Scenario DemoDay;
 Interface comrade;
 
 SwInterface sw;
-
-Client Comrade_Client;
-
-ControlDevice stick;
-
 String Server_Input;
 int Server_Data;
 
+Client Comrade_Client;
+ControlDevice stick;
 float px;
-
 JoyStick js;
-
-
 ControlIO control; // Joystick control
 ControlDevice momo; // Logitech steer
-
-
-
-
 float momoSteer;
 PShape carShape;
 
@@ -89,7 +79,10 @@ boolean pathplannerscreen = false;         // startscrien on
 boolean keycontrol = true;
 boolean update = false;
 
+PShape dash;
+
 PFont f;                    // Font variable
+
 
 
 /* 
@@ -100,7 +93,7 @@ Create program setup
 void setup() {
   // window configuration
   size(1600,800,P3D);
-
+  
   Comrade_Client = new Client(this, "127.0.0.1", 100); // Replace with your server's IP and port
  //  control = ControlIO.getInstance(this);// Initialise the ControlIO
  //  momo = control.getMatchedDevice("Wheel");// Find a device that matches the configuration file
@@ -112,18 +105,21 @@ void setup() {
   initialize_typo();
   if(joystickavailable){   initialize_joyStick();  }
    //scale(5);
+   
+   dash = loadShape("dash.svg");
+   dash.rotateZ(-PI/2);
+   dash.rotateX(PI/7);
+   dash.scale(0.5);
 }
 
 void draw(){
   background(255);
   lights();
   
-  if(startscreen){  startgui.run();  }
-
   sw.run();
   DemoDay.run();
   c.run();
-  gui();
+  gui.run();
   g.run();
   co.run();
   p.run();

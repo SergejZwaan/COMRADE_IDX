@@ -1,60 +1,97 @@
-class Camera{
+class Camera {
 
- // PVector[] camSnake = new PVector[10];
+  String camPerspective;
+
+
   float Distance =-1.0;
   float cameraHeight = 0.0;
   float eyeHeight = 0.0;
+  float theta = 0.0;
   PVector AdvancedCam;
-  
-  Camera(){
- 
-     AdvancedCam = new PVector(0.0,0.0);
-     frustum(-20, 20, -20, 20, 10, 500);
+
+  Camera() {
+    // todo: add startscreen
+    camPerspective = "GUI"; // start with the gui
+    AdvancedCam = new PVector(0.0, 0.0);
   }
-  
-  void run(){
-     
-     
-     //if(firstperson == true){first_Person();}
-     //if(firstperson == false){top_View();}
-     
-    AdvancedCam = car.getLocation().copy();
-    PVector camDistance = new PVector(Distance,0);
-    camDistance.rotate(car.getangle());
-    AdvancedCam.add(camDistance);
-    //PVector camerapoint = car.getCameraLocation().copy();
-    
-    pushMatrix();
-     translate(0,0,-10);
-     ellipse(AdvancedCam.x, AdvancedCam.y, 10,10);
-     popMatrix();
-     
-     PVector eye = car.getLocation().copy();
-    camera( AdvancedCam.x, AdvancedCam.y, -40, eye.x, eye.y, -40, 0, 0, 1);
-    
-     //city_top_View();
+
+  void run() {
+
+    switch(camPerspective) {
+    case "GUI":
+      top_View();
+      break;
+
+    case "SIMULATOR":
+      advanced_cam_View();
+      break;
+
+    case "SHOWCASE":
+      showcase_View();
+      break;
+
+    default:
+      top_View();
+      break;
+    }
+    //if(firstperson == true){first_Person();}
+    //if(firstperson == false){top_View();}
+    //city_top_View();
+    // advanced_cam_View();
   }
-  
-  void first_Person(){
+
+  void first_Person() {
     PVector eye = car.getLocation().copy();
     PVector camerapoint = car.getCameraLocation().copy();
     camera( camerapoint.x, camerapoint.y, -40, eye.x, eye.y, -40, 0, 0, 1);
   }
-  
-  void top_View(){
+
+  void top_View() {
+    frustum(-17.5, 17.5, -8.5, 8.5, 15, -300); // default frustum
     camera( gridWidth/2, gridHeight/2, 690, gridWidth/2, gridHeight/2, 0, 0, 1, 0);
   }
-  
-  void city_top_View(){
+
+  void city_top_View() {
     camera( gridWidth/2, gridHeight/2, -800, gridWidth/2, gridHeight/2, 0, 0, 1, 0);
   }
-  
-  void advanced_cam_View(){
+
+  void advanced_cam_View() {
     advanced_Camera();
   }
-  
-  void advanced_Camera(){
-    
+
+  void advanced_Camera() {
+    frustum(-20, 20, -20, 20, 10, 500);
+    AdvancedCam = car.getLocation().copy();
+    PVector carDistance = new PVector(100, 0);
+    PVector camDistance = new PVector(10, 0);
+    camDistance.rotate(car.getangle());
+    carDistance.rotate(car.getangle());
+    AdvancedCam.add(camDistance);
+    pushMatrix();
+    translate(0, 0, -10);
+    popMatrix();
+    PVector eye = car.getLocation().copy();
+    eye.add(carDistance);
+    camera( AdvancedCam.x, AdvancedCam.y, -20, eye.x, eye.y, -20, 0, 0, 1);
   }
-  
+
+  void showcase_View() {
+    frustum(-20, 20, -20, 20, 10, 500);
+    AdvancedCam = car.getLocation().copy();
+    PVector camDistance = new PVector(-100, 0);
+    camDistance.rotate(theta);
+    theta += 0.005;
+    AdvancedCam.add(camDistance);   
+    pushMatrix();
+    translate(0, 0, -10);
+    popMatrix();
+    PVector eye = car.getLocation().copy();
+    camera( AdvancedCam.x, AdvancedCam.y, -70, eye.x, eye.y, -10, 0, 0, 1);
+  }
+
+  // input functions
+  void set_Perspective(String input) {camPerspective = input;}
+
+  // return functions
+  String get_Perspective() {return camPerspective;}
 }
