@@ -10,7 +10,6 @@ void initialize_serial(boolean serialAvailibleSwitch) {
 }
 
 void initialize_objects() {
-
   g = new Grid();
   c = new Camera();
   p = new PathPlanner();

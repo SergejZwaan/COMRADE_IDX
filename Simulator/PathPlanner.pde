@@ -225,16 +225,9 @@ class PathPlanner{
      }
      
      void loadPreset(){
-       
        for(int i = 0; i<40; i++){
          ppp.add(new PathPlannerPoint(xcor[i],ycor[i], i));
          //println("add new p" + i);
        }
-       
      }
-
-
-
-
-
 }

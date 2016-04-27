@@ -11,8 +11,6 @@ class Scenario{
   
   void run(){
     carlocation = car.getLocation().copy();
-    
-    if(firstperson){
     draw_road();
     pushMatrix();
     translate(0,0,5);
@@ -20,7 +18,7 @@ class Scenario{
     draw_buildings();
    // scenario1();
     popMatrix();
-    }
+    
     
   }
   
@@ -81,7 +79,7 @@ class Scenario{
         pushMatrix();
         translate(250 + i*220,250,-150);
         fill(255);
-        box(120,80,150);
+        box(120,80,250);
         popMatrix();
         }
         
@@ -89,7 +87,7 @@ class Scenario{
         pushMatrix();
         translate(250 + i*220,550,-150);
         fill(255);
-        box(80,120,150);
+        box(80,120,250);
         popMatrix();
         }
         
@@ -99,7 +97,7 @@ class Scenario{
         pushMatrix();
         translate(200 + i*240,0,-150);
         fill(255);
-        box(200,80,150);
+        box(200,80,250);
         popMatrix();
         }
         
@@ -109,7 +107,7 @@ class Scenario{
         pushMatrix();
         translate(200 + i*240,gridHeight,-150);
         fill(255);
-        box(200,80,150);
+        box(200,80,250);
         popMatrix();
         }
   }

@@ -2,9 +2,13 @@ class GUI{
   String guiState;
   
   StartScreen startgui;      // Create object from StartScreen class, main gui
+  ConfigScreen config;
+  PlannerScreen planner;
   
   GUI(){
     startgui = new StartScreen();
+    config = new ConfigScreen();
+    planner = new PlannerScreen();
     guiState = "STARTSCREEN";  
   }
   
@@ -29,6 +33,27 @@ class GUI{
           pathplannerscreen = true;
       break;
       
+      case "SHOWCASE":
+          c.set_Perspective("SHOWCASE");
+          pathplannerscreen = true;
+      break;
+      
+      case "PLANNER":
+          c.set_Perspective("PLANNER");
+          planner.display();
+      break;
+      
+      case "CONFIG":
+          c.set_Perspective("CONFIG");
+          config.display();
+          pathplannerscreen = true;
+      break;
+      
+        case "SCENARIO":
+          c.set_Perspective("PLANNER");
+          //scenario.display();
+          
+      break;
       
       default:
       
@@ -81,7 +106,7 @@ class GUI{
     }if (key == 'r'){
       car.reset();
     }if (key == 'l'){
-      c.set_Perspective("SHOWCASE");
+      set_GUI_State("SHOWCASE");
     } 
   }
 }

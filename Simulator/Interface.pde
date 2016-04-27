@@ -1,5 +1,4 @@
 class Interface{
-
   Interface(){
   }
   

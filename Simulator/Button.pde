@@ -16,11 +16,6 @@ class Button {
   }
 
   void display() {
-    if (hover) {
-      buttonCol = 200;
-    } else {
-      buttonCol = 255;
-    }
     fill(buttonCol);
     rect(x, y, w, h);
     fill(0);

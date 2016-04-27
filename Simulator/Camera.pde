@@ -31,17 +31,13 @@ class Camera {
       break;
       
      case "PATHPLANNER":
-      top_View();
+      city_top_View();
       break;
 
     default:
-      top_View();
+      city_top_View();
       break;
     }
-    //if(firstperson == true){first_Person();}
-    //if(firstperson == false){top_View();}
-    //city_top_View();
-    // advanced_cam_View();
   }
 
   void first_Person() {
@@ -56,7 +52,7 @@ class Camera {
   }
 
   void city_top_View() {
-    camera( gridWidth/2, gridHeight/2, -800, gridWidth/2, gridHeight/2, 0, 0, 1, 0);
+    camera( gridWidth/2, gridHeight/2, -690, gridWidth/2, gridHeight/2, 0, 0, 1, 0);
   }
 
   void advanced_cam_View() {
@@ -82,7 +78,7 @@ class Camera {
   void showcase_View() {
     frustum(-20, 20, -20, 20, 10, 500);
     AdvancedCam = car.getLocation().copy();
-    PVector camDistance = new PVector(-100, 0);
+    PVector camDistance = new PVector(-50, 0);
     camDistance.rotate(theta);
     theta += 0.005;
     AdvancedCam.add(camDistance);   
@@ -90,7 +86,7 @@ class Camera {
     translate(0, 0, -10);
     popMatrix();
     PVector eye = car.getLocation().copy();
-    camera( AdvancedCam.x, AdvancedCam.y, -70, eye.x, eye.y, -10, 0, 0, 1);
+    camera( AdvancedCam.x, AdvancedCam.y, -60, eye.x, eye.y, -10, 0, 0, 1);
   }
 
   // input functions
