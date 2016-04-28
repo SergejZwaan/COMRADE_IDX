@@ -114,7 +114,9 @@ class GUI{
       car.reset();
     }if (key == 'l'){
       set_GUI_State("SHOWCASE");
-    } 
+    }
+    
+  
     
     if (key == '1'){
       testState = 1;

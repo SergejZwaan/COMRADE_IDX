@@ -150,3 +150,10 @@ void draw(){
 void mouseMoved(){
   p.checkmouseMoved();
 }
+
+void keyPressed(){
+if (key == 'm'){
+        Comrade_Client = new Client(this, "127.0.0.1", 100); // Replace with your server's IP and port
+        println("reconnect");
+    }  
+}
