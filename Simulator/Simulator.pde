@@ -39,6 +39,7 @@ Interface comrade;
 SwInterface sw;
 String Server_Input;
 int Server_Data;
+int testState = 0;
 
 Client Comrade_Client;    // communication client
 ControlDevice stick;      // Java input device
@@ -123,6 +124,7 @@ void setup() {
 }
 
 void draw(){
+  println(testState);
   background(255);
   lights();
   

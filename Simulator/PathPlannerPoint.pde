@@ -40,6 +40,12 @@ class PersonPoint {
       fill(0,50,50);
       translate(0,0,-10);
       ellipse(location.x,location.y,pointSize,pointSize);
+      
+      translate(0,0,20);
+      ellipse(location.x,location.y,pointSize,pointSize);
+      box(30);
+      translate(location.x,location.y,-30);
+      box(10,10,30);
     popMatrix();
   }
 

@@ -33,6 +33,7 @@ class GUI{
       case "PATHPLANNER":
           c.set_Perspective("PATHPLANNER");
           pathplannerscreen = true;
+          
       break;
       
       case "SHOWCASE":
@@ -113,6 +114,20 @@ class GUI{
       car.reset();
     }if (key == 'l'){
       set_GUI_State("SHOWCASE");
+    } 
+    
+    if (key == '1'){
+      testState = 1;
+    }if (key == '2'){
+      testState = 2; 
+    }if (key == '3'){
+     testState = 3;
+    }if (key == '4'){
+      testState = 4;
+    }if (key == '5'){
+      testState = 5;
+    } if (key == '0'){
+      testState = 0;
     } 
   }
 }
