@@ -30,8 +30,12 @@ class Camera {
       showcase_View();
       break;
       
-     case "PATHPLANNER":
-      city_top_View();
+     case "PLANNER":
+      city_bottom_View();
+      break;
+      
+     case "SCENARIO":
+      city_high_View();
       break;
 
     default:
@@ -53,6 +57,14 @@ class Camera {
 
   void city_top_View() {
     camera( gridWidth/2, gridHeight/2, -690, gridWidth/2, gridHeight/2, 0, 0, 1, 0);
+  }
+  
+  void city_bottom_View() {
+    camera( gridWidth/2, gridHeight/2, 690, gridWidth/2, gridHeight/2, 0, 0, 1, 0);
+  }
+  
+  void city_high_View() {
+    camera( gridWidth/2, gridHeight/2, -990, gridWidth/2, gridHeight/2, 0, 0, 1, 0);
   }
 
   void advanced_cam_View() {

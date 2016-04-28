@@ -35,9 +35,9 @@ class Car{
   void update(){
     // joystick control
     if(drive && joystickavailable){
-      speed = js.get_Gas()*2;
-      speed -= js.get_Brake()*4;
-      if(speed<0){speed = 0;}
+      speed = abs(js.get_Gas()*2)+0.01;
+      speed -= abs(js.get_Brake()*4+0.01);
+      if(speed<0){speed = 0.01;}
     } else {
       // else set standard speed
       speed = 0.5;
@@ -50,12 +50,10 @@ class Car{
     if(drive == true){
      
       if(autopilot == true){velocity.add(force);}
-      
       velocity.rotate(theta);
       velocity.setMag(nettospeed);
       if(drive){location.add(velocity);}
       else{location.add(new PVector(0.0,0.0));}
-      
       calc_Angle();
       }
     
@@ -65,23 +63,32 @@ class Car{
   
   void speedControl(){
       dAngle = abs(angle - oldAngle) * 100;
-      
-      
-      println(theta + " " + angle + " " + dAngle);
-      if(joystickavailable){speed = js.get_Gas()*3;}
+      //println(theta + " " + angle + " " + dAngle);
+      if(joystickavailable){speed = js.get_Gas() + 0.01;}
       else{speed = 1.0;}
-        if(dAngle < 1){
-       speed -= dAngle/1.7;}else{
-         theta = 0.0;
-       }
+      
+      // autopilot speed control;
+      if(autopilot){ speed = 0.5;}
+      
+      // autonomous driving speed control
+      if(controlState == 1){
+              if(dAngle < 1){
+              speed -= dAngle/1.7;
+              if(speed < 0.0){speed = 0.0;}
+              }else{
+               //theta = 0.0;
+             }
+      }
       
       if(nettospeed < speed){
         nettospeed += acceleration;
       } else if(nettospeed> speed){
         nettospeed -= acceleration * 2;
       }
-  
-  
+      
+      if(nettospeed < 0.1){
+        nettospeed = 0.1;
+      }
   }
   
   void display(){
@@ -113,14 +120,14 @@ class Car{
   }
   
   void calc_Angle(){
-      distx = location.x - (location.x - xold)*50;
-      disty = location.y - (location.y - yold)*50;
-     // cameraX = location.x - (location.x - xold)*70 /car.getNettoSpeed();
-     // cameraY = location.y - (location.y - yold)*70 /car.getNettoSpeed();
+      distx = location.x - (location.x - xold) *50;
+      disty = location.y - (location.y - yold) *50;
       xold = location.x;
       yold = location.y;
+      //if(abs(distx) > 1 && abs(disty) > 1 && nettospeed > 0.3){
       oldAngle = angle;
       angle = atan2(location.y-disty, location.x-distx);
+      //}
   
   }
   
@@ -162,6 +169,7 @@ void setSteer(int input){
 void setSteerJoyStick(float input){
   float steerValueInput = input/100;
   theta = -steerValueInput/270;
+  //println("check" + theta);
 }
 
 void resetTheta(){

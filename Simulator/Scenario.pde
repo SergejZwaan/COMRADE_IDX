@@ -15,8 +15,7 @@ class Scenario{
     pushMatrix();
     translate(0,0,5);
     draw_road();
-    draw_buildings();
-   // scenario1();
+    if(gui.get_GUI_State() != "PLANNER"){draw_buildings();}
     popMatrix();
     
     
@@ -25,51 +24,16 @@ class Scenario{
   // draw the road visual
   void draw_road(){
   
+      
       pushMatrix();
                 translate(0,0,-1.1);
                 int margin = 75;
                 fill(60);
-                
-                // roads
-                strokeWeight(0);
-                rect(margin,margin,(gridWidth/2)-margin,margin);                  // rect 1
-                rect(margin,margin,margin,(gridHeight/2)-margin);                 // rect 2
-                rect(margin,(gridHeight/2)-margin/2,(gridWidth)-margin*2,margin);  // rect 3
-                rect((gridWidth)-margin*2,(gridHeight/2),margin,(gridHeight/2)-margin);   // rect 4
-                rect((gridWidth/2),gridHeight-margin*2,(gridWidth/2)-margin,margin);      // rect 5
-                
-                rect((gridWidth/2)-margin/2,margin,margin,gridHeight-margin*2);                 // rect 6
-                
-                strokeWeight(1);
-                // upper left
+                shape(road, gridWidth-margin, margin, gridWidth-(margin*2), gridHeight-(margin*2));
+                translate(0,0,-1);
+                fill(255);
+                shape(roadlines, gridWidth-margin, margin, gridWidth-(margin*2), gridHeight-(margin*2));
                
-                // corners outer
-                fill(60);
-                arc(margin*2+margin, margin*2+margin, margin*4, margin*4, PI, PI+HALF_PI);
-                arc(margin*2+margin, gridHeight/2-margin/2-margin, margin*4, margin*4, HALF_PI, PI);
-                arc( (gridWidth/2)-margin/2+margin*2, gridHeight-margin*2-margin, margin*4, margin*4,  HALF_PI, PI);
-                arc((gridWidth/2)-margin/2-margin, margin*2+margin, margin*4, margin*4, PI+HALF_PI, TWO_PI);
-                arc( gridWidth - margin*2-margin, gridHeight/2-margin/2+margin*2, margin*4, margin*4,  PI+HALF_PI, TWO_PI);
-                arc( gridWidth - margin*2-margin, gridHeight-margin*2-margin, margin*4, margin*4, 0, HALF_PI);
-          
-                    translate(0,0,-1);
-                    fill(30);
-                    arc(margin*2+margin, margin*2+margin, margin*2, margin*2, PI, PI+HALF_PI);
-                    arc(margin*2+margin, gridHeight/2-margin/2-margin, margin*2, margin*2, HALF_PI, PI);
-                    arc( (gridWidth/2)-margin/2+margin*2, gridHeight-margin*2-margin, margin*2, margin*2, HALF_PI, PI);
-                    arc((gridWidth/2)-margin/2-margin, margin*2+margin, margin*2, margin*2, PI+HALF_PI, TWO_PI);
-                    arc( gridWidth - margin*2-margin, gridHeight/2-margin/2+margin*2, margin*2, margin*2,  PI+HALF_PI, TWO_PI);
-                    arc( gridWidth - margin*2-margin, gridHeight-margin*2-margin, margin*2, margin*2, 0, HALF_PI);
-                    
-                    // path planner screen visual
-                    translate(0,0,1);
-                    fill(30);
-                    arc(margin*2+margin, margin*2+margin, margin*2, margin*2, PI, PI+HALF_PI);
-                    arc(margin*2+margin, gridHeight/2-margin/2-margin, margin*2, margin*2, HALF_PI, PI);
-                    arc( (gridWidth/2)-margin/2+margin*2, gridHeight-margin*2-margin, margin*2, margin*2, HALF_PI, PI);
-                    arc((gridWidth/2)-margin/2-margin, margin*2+margin, margin*2, margin*2, PI+HALF_PI, TWO_PI);
-                    arc( gridWidth - margin*2-margin, gridHeight/2-margin/2+margin*2, margin*2, margin*2,  PI+HALF_PI, TWO_PI);
-                    arc( gridWidth - margin*2-margin, gridHeight-margin*2-margin, margin*2, margin*2, 0, HALF_PI);
       popMatrix();
   }
   
@@ -79,7 +43,7 @@ class Scenario{
         pushMatrix();
         translate(250 + i*220,250,-150);
         fill(255);
-        box(120,80,250);
+        box(120,80,150);
         popMatrix();
         }
         
@@ -87,7 +51,7 @@ class Scenario{
         pushMatrix();
         translate(250 + i*220,550,-150);
         fill(255);
-        box(80,120,250);
+        box(80,120,150);
         popMatrix();
         }
         
@@ -97,7 +61,7 @@ class Scenario{
         pushMatrix();
         translate(200 + i*240,0,-150);
         fill(255);
-        box(200,80,250);
+        box(200,80,150);
         popMatrix();
         }
         
@@ -107,7 +71,7 @@ class Scenario{
         pushMatrix();
         translate(200 + i*240,gridHeight,-150);
         fill(255);
-        box(200,80,250);
+        box(200,80,150);
         popMatrix();
         }
   }

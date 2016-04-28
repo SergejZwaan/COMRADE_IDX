@@ -28,6 +28,8 @@ void initialize_carShape() {
 
   // configurate car shape
   carShape = loadShape("comradecar1.obj");
+  carShape.disableStyle();
+  carShape.fill(255);
   carShape.scale(5);
   carShape.rotateY(PI);
   carShape.rotateX(PI/2);

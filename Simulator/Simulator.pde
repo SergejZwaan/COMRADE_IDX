@@ -1,13 +1,10 @@
 /*
 
 COMRADE IDX 
-Inteligent Driving Experience
-Simulation Software Version 1.0.
+Autonomous Driving Experience
+Simulation Software Version 2.0.
 
-Compatible with the COMRADE IDX Mark 1 prototype.
 */
-
-// github compatible
 
 /* 
 Importing libraries
@@ -43,14 +40,14 @@ SwInterface sw;
 String Server_Input;
 int Server_Data;
 
-Client Comrade_Client;
-ControlDevice stick;
-float px;
-JoyStick js;
-ControlIO control; // Joystick control
-ControlDevice momo; // Logitech steer
+Client Comrade_Client;    // communication client
+ControlDevice stick;      // Java input device
+float px;                 // input data from the joystick
+JoyStick js;              // system joystick class
+ControlIO control;        // Joystick control
+ControlDevice momo;       // Logitech steer
 float momoSteer;
-PShape carShape;
+PShape carShape;          // car shape
 
 
 /* 
@@ -65,21 +62,19 @@ int controlState = 0;       //
 boolean autopilot = false;          // autopilot
 boolean start = false;              // start (makes the car drive)
 boolean firstperson = false;        // first person view
-
 boolean startpathplanner = false;   // pathplanner
 boolean manualinput = true;         // manual input
-
 boolean serialavailable = false;     // serial device available
-boolean joystickavailable = false;   // youstick variable
-
+boolean joystickavailable = true;   // youstick variable
 boolean loadpreset = true;
-
 boolean startscreen = true;         // startscrien on
 boolean pathplannerscreen = false;         // startscrien on
 boolean keycontrol = true;
 boolean update = false;
 
 PShape dash;
+PShape road;
+PShape roadlines;
 
 PFont f;                    // Font variable
 
@@ -94,9 +89,9 @@ void setup() {
   // window configuration
   size(1600,800,P3D);
   
-  Comrade_Client = new Client(this, "127.0.0.1", 100); // Replace with your server's IP and port
- //  control = ControlIO.getInstance(this);// Initialise the ControlIO
- //  momo = control.getMatchedDevice("Wheel");// Find a device that matches the configuration file
+   Comrade_Client = new Client(this, "127.0.0.1", 100); // Replace with your server's IP and port
+   control = ControlIO.getInstance(this);// Initialise the ControlIO
+   momo = control.getMatchedDevice("Wheel");// Find a device that matches the configuration file
 
   // initialization
   initialize_serial(serialavailable); // Initialize the serial connection 
@@ -104,12 +99,27 @@ void setup() {
   initialize_carShape();
   initialize_typo();
   if(joystickavailable){   initialize_joyStick();  }
-   //scale(5);
-   
+  
    dash = loadShape("dash.svg");
    dash.rotateZ(-PI/2);
    dash.rotateX(PI/7);
    dash.scale(0.5);
+   
+   
+   road = loadShape("road.svg");
+   road.disableStyle();
+   road.rotateY(PI);
+   road.fill(0);
+   
+   
+   roadlines = loadShape("lines.svg");
+   roadlines.disableStyle();
+   roadlines.rotateY(PI);
+   roadlines.fill(255);
+   noStroke();
+   
+   // places car standard in manual mode
+   //controlState = 2;
 }
 
 void draw(){
@@ -124,8 +134,8 @@ void draw(){
   co.run();
   p.run();
   if(joystickavailable){js.run();}
-  if( controlState == 2 && serialavailable){  car.setSteer(co.getSteerValue()); }
-  if( joystickavailable){car.setSteerJoyStick(momoSteer);} 
+ // if( controlState == 2 && serialavailable){  car.setSteer(co.getSteerValue()); }
+  if(joystickavailable){car.setSteerJoyStick(momoSteer);} 
   car.run();
   
   // manual drive

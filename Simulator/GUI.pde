@@ -4,11 +4,13 @@ class GUI{
   StartScreen startgui;      // Create object from StartScreen class, main gui
   ConfigScreen config;
   PlannerScreen planner;
+  ScenarioScreen scenario;
   
   GUI(){
     startgui = new StartScreen();
     config = new ConfigScreen();
     planner = new PlannerScreen();
+    scenario = new ScenarioScreen();
     guiState = "STARTSCREEN";  
   }
   
@@ -50,8 +52,8 @@ class GUI{
       break;
       
         case "SCENARIO":
-          c.set_Perspective("PLANNER");
-          //scenario.display();
+          c.set_Perspective("SCENARIO");
+          scenario.display();
           
       break;
       
@@ -67,6 +69,10 @@ class GUI{
   
   void set_GUI_State(String input){
     guiState = input;
+  }
+  
+  String get_GUI_State(){
+    return guiState;
   }
   
   

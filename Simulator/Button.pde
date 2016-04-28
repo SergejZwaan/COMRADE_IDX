@@ -21,6 +21,11 @@ class Button {
     fill(0);
     text(text, x+10, y+20);
   }
+  
+/* 
+Return if hover over
+---------------------------------------------------------------------------------------------
+*/
 
   boolean checkHover() {
     if (mouseX < (x+w) && mouseX > x) {
@@ -35,7 +40,10 @@ class Button {
     return hover;
   }
 
-
+/* 
+Return if clicked
+---------------------------------------------------------------------------------------------
+*/
   boolean checkClicked() {
     if (mousePressed) {
       clicked = true;
