@@ -39,7 +39,7 @@ Interface comrade;
 SwInterface sw;
 String Server_Input;
 int Server_Data;
-int testState = 0;
+int testState;
 
 Client Comrade_Client;    // communication client
 ControlDevice stick;      // Java input device
@@ -121,10 +121,11 @@ void setup() {
    
    // places car standard in manual mode
    //controlState = 2;
+   testState = 0;
 }
 
 void draw(){
-  println(testState);
+ 
   background(255);
   lights();
   

@@ -170,10 +170,28 @@ class PathPlanner {
   }
   
   void persondisplay(){
-   for ( int i = 0; i < pp.size(); i++) {
+   if(testState == 1){
+      for ( int i = 0; i < xcor1.length; i++) {
       PersonPoint p = pp.get(i);
       p.display();
-    }
+     }
+   }
+   
+   if(testState == 2){
+     for ( int i = 0; i < xcor2.length; i++) {
+      PersonPoint p = pp.get(i);
+      p.display();
+     }
+   }
+   
+   if(testState == 3){
+     for ( int i = 0; i < xcor3.length; i++) {
+      PersonPoint p = pp.get(i);
+      p.display();
+     }
+   
+   }
+   
    
   }
 

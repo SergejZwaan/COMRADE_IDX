@@ -38,13 +38,18 @@ class PersonPoint {
   void display(){
     pushMatrix();
       fill(0,50,50);
-      translate(0,0,-10);
+      
+      // gui
+      translate(0,0,-2);
       ellipse(location.x,location.y,pointSize,pointSize);
       
+      // person
       translate(0,0,20);
+      if(gui.get_GUI_State() == "PLANNER"){
       ellipse(location.x,location.y,pointSize,pointSize);
-      box(30);
-      translate(location.x,location.y,-30);
+      }
+      
+      translate(location.x,location.y,-35);
       box(10,10,30);
     popMatrix();
   }

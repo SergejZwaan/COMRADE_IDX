@@ -1,10 +1,13 @@
 class SwInterface{
   int autonomousMode =-1;
   int oldAutonomousMode = -1;
+  int oldTestState = -1;
   String state;
   int time;
   int oldtime = 0;
   int difference = 50;
+  
+  String message = "";
   
   
   
@@ -29,8 +32,11 @@ class SwInterface{
           break;
       }
       
-      if(autonomousMode != oldAutonomousMode){
+      if(autonomousMode != oldAutonomousMode && testState != oldTestState){
+         
+         message =  "i" + autonomousMode + 'b' + testState + 'e';
          oldAutonomousMode = autonomousMode;
+         oldTestState = testState;
          Comrade_Server.write(autonomousMode);
       }
      // if((time - oldtime) > difference){

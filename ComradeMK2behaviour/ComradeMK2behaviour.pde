@@ -26,6 +26,8 @@ PFont f;
 
 boolean hwConnected = true;
 
+int testState = 3;
+
 void setup(){
   size(1400,800);
   
