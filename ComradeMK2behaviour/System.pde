@@ -36,7 +36,7 @@ class System{
     
     // smooth
     if(candriveNetto > candriveTarget){   candriveNetto -= candriveH;  }
-    if(candriveNetto < candriveTarget){   candriveNetto += candriveH;  }
+    if(candriveNetto < candriveTarget){   candriveNetto += 1;  }
     
     // set candrive status
     candriveAUTOsum = int(candriveNetto);
