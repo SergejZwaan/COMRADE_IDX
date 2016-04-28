@@ -64,6 +64,42 @@ void setP5GUI() {
   // overall candrive slider
 
 
+  cp5.addButton("s0")
+    .setValue(0)
+    .setPosition(600, 20)
+    .setSize(100, 100);
+    
+    cp5.addButton("s1")
+    .setValue(0)
+    .setPosition(700, 20)
+    .setSize(100, 100);
+    
+      cp5.addButton("s2")
+    .setValue(0)
+    .setPosition(800, 20)
+    .setSize(100, 100);
+    
+      cp5.addButton("s3")
+    .setValue(0)
+    .setPosition(900, 20)
+    .setSize(100, 100);
+    
+      cp5.addButton("s4")
+    .setValue(0)
+    .setPosition(1000, 20)
+    .setSize(100, 100);
+    
+      cp5.addButton("s5")
+    .setValue(0)
+    .setPosition(1100, 20)
+    .setSize(100, 100);
+    
+  
+
+
+
+
+
 
   
   // Scenario inputs
@@ -193,6 +229,13 @@ public void WantManual() {
   }
   else { buttonCheck++; }
 }
+
+public void s0() {testState=0;}
+public void s1() {testState=1;}
+public void s2() {testState=2;}
+public void s3() {testState=3;}
+public void s4() {testState=4;}
+public void s5() {testState=5;}
 
 void graphicalElements(){
 

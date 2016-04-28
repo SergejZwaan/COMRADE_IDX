@@ -68,7 +68,12 @@ class Car{
       else{speed = 1.0;}
       
       // autopilot speed control;
-      if(autopilot){ speed = 0.5;}
+      if(autopilot && testState == 0){ speed = 0.7;}
+       if(autopilot && testState == 1){ speed = 0.7;}
+        if(autopilot && testState == 2){ speed = 0.5;}
+         if(autopilot && testState == 3){ speed = 0.2;}
+          if(autopilot && testState == 4){ speed = 0.7;}
+           if(autopilot && testState == 5){ speed = 0.8;}
       
       // autonomous driving speed control
       if(controlState == 1){

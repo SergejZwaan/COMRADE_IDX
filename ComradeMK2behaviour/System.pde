@@ -3,8 +3,13 @@ class System{
   private int candriveAUTOsum;
   private int candriveMANUALsum;
   
+  float candriveTarget;
+  float candriveNetto;
+  float candriveH;
+  
   System(){
-    
+    candriveNetto = 100.0;
+    candriveH = 0.1;
   }
   
   void run(){
@@ -20,6 +25,26 @@ class System{
     
     //Auto
     
+    if(mode == "USERTEST"){
+    // set targets
+    if(testState == 0){candriveTarget = 100.0;}
+    if(testState == 1){candriveTarget = 100.0;}
+    if(testState == 2){candriveTarget = 50.0;}
+    if(testState == 3){candriveTarget = 0.0;}
+    if(testState == 4){candriveTarget = 100.0;}
+    if(testState == 5){candriveTarget = 100.0;}
+    
+    // smooth
+    if(candriveNetto > candriveTarget){   candriveNetto -= candriveH;  }
+    if(candriveNetto < candriveTarget){   candriveNetto += candriveH;  }
+    
+    // set candrive status
+    candriveAUTOsum = int(candriveNetto);
+    println(candriveNetto);
+    
+    }
+    
+    if(mode == "NORMAL"){
     candriveAUTOsum += Radar/2;
     candriveAUTOsum += GPS/2;
     CanDrive = candriveAUTOsum;  
@@ -32,7 +57,7 @@ class System{
     if(Platoon){candriveMANUALsum = 0;}
     if(AHWay){candriveMANUALsum = 0;}
     if(Manouvre){candriveMANUALsum = 0;}
-    
+    }
     
   }
   

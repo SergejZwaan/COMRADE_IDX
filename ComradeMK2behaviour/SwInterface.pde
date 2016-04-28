@@ -7,7 +7,7 @@ class SwInterface{
   int oldtime = 0;
   int difference = 50;
   
-  String message = "";
+  String message;
   
   
   
@@ -18,9 +18,6 @@ class SwInterface{
   }
   
   void run(){
-      //time = millis();
-      
-      
       state = fsm.getState();
       switch (state){
          case "MANUAL": 
@@ -31,23 +28,11 @@ class SwInterface{
           autonomousMode = 1;
           break;
       }
-      
-      if(autonomousMode != oldAutonomousMode && testState != oldTestState){
-         
-         message =  "i" + autonomousMode + 'b' + testState + 'e';
+     if(autonomousMode != oldAutonomousMode || testState != oldTestState){
+         message =  "i"+autonomousMode+"b"+testState+"e";
          oldAutonomousMode = autonomousMode;
          oldTestState = testState;
-         Comrade_Server.write(autonomousMode);
+         Comrade_Server.write(message);
       }
-     // if((time - oldtime) > difference){
-     // oldtime = time;
-     // Comrade_Server.write(autonomousMode);
-     // }
-      
-      //println(autonomousMode);
-  
   }
-
-
-
 }

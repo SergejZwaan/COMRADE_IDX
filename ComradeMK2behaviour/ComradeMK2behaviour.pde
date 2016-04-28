@@ -25,12 +25,14 @@ int Comrade_Client_Data[];
 PFont f;
 
 boolean hwConnected = true;
+String mode;
 
-int testState = 3;
+int testState;
 
 void setup(){
   size(1400,800);
-  
+  testState = 0;
+  mode = "USERTEST";
   Comrade_Server = new Server(this, 100); // Start a simple server on a port
   if(hwConnected){hwPort = new Serial(this, Serial.list()[0], 9600);}
   
