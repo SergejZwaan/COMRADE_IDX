@@ -16,7 +16,7 @@ class Car{
   float speed = 0.5;
   
   // acceleration variables
-  float acceleration = 0.01;
+  float acceleration = 0.005;
   float nettospeed = 0.0;
 
   boolean drive = false;
@@ -35,9 +35,9 @@ class Car{
   void update(){
     // joystick control
     if(drive && joystickavailable){
-      speed = abs(js.get_Gas()*2)+0.01;
-      speed -= abs(js.get_Brake()*4+0.01);
-      if(speed<0){speed = 0.01;}
+      speed = abs(js.get_Gas()*2)+0.0001;
+      speed -= abs(js.get_Brake()*4+0.0001);
+      if(speed<0){speed = 0.0001;}
     } else {
       // else set standard speed
       speed = 0.5;
@@ -64,8 +64,8 @@ class Car{
   void speedControl(){
       dAngle = abs(angle - oldAngle) * 100;
       //println(theta + " " + angle + " " + dAngle);
-      if(joystickavailable){speed = js.get_Gas() + 0.01;}
-      else{speed = 1.0;}
+      if(joystickavailable){speed = js.get_Gas() + 0.00001;}
+      else{speed = 0.9;}
       
       // autopilot speed control;
       if(autopilot && testState == 0){ speed = 0.7;}
@@ -78,8 +78,8 @@ class Car{
       // autonomous driving speed control
       if(controlState == 1){
               if(dAngle < 1){
-              speed -= dAngle/1.7;
-              if(speed < 0.0){speed = 0.0;}
+              speed -= dAngle/0.5;
+              if(speed < 0.0){speed = 0.001;}
               }else{
                //theta = 0.0;
              }
@@ -91,8 +91,8 @@ class Car{
         nettospeed -= acceleration * 2;
       }
       
-      if(nettospeed < 0.1){
-        nettospeed = 0.1;
+      if(nettospeed < 0.01){
+        nettospeed = 0.01;
       }
   }
   
@@ -117,7 +117,7 @@ class Car{
          
          translate(location.x,location.y,-80);
          rotate(angle);
-         if(c.get_Perspective() == "SIMULATOR"){shape(dash, 12, 38, 25, 120);}
+        // if(c.get_Perspective() == "SIMULATOR"){shape(dash, 12, 38, 25, 120);}
         
     popMatrix();
     

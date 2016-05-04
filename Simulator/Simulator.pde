@@ -49,7 +49,7 @@ ControlIO control;        // Joystick control
 ControlDevice momo;       // Logitech steer
 float momoSteer;
 PShape carShape;          // car shape
-
+PShape testDummy;          // car shape
 
 /* 
 Define variables
@@ -125,12 +125,12 @@ void setup() {
 }
 
 void draw(){
- 
-  background(255);
+  println(mouseX,mouseY);
+  background(240,240,250);
   lights();
   
   sw.run();
-  DemoDay.run();
+  
   c.run();
   gui.run();
   g.run();

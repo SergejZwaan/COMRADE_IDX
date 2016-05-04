@@ -17,7 +17,7 @@ class JoyStick {
 
   void run() {
     if(joystickavailable){  
-        momoSteer = map(momo.getSlider("W").getValue(), -1, 1,-180, 180);
+        momoSteer = map(momo.getSlider("W").getValue(), -1, 1,-280, 280);
         gas = map(momo.getSlider("A").getValue(),1, -1,0, 1);
         brake = map(momo.getSlider("B").getValue(),1, -1,0, 1);
         //println("gas: " + gas + " - brake:  " + brake + "-steer: " + momoSteer);

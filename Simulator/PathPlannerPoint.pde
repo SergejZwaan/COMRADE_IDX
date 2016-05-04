@@ -51,6 +51,7 @@ class PersonPoint {
       
       translate(location.x,location.y,-35);
       box(10,10,30);
+      //shape(testDummy,10,10);
     popMatrix();
   }
 

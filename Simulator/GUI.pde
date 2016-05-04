@@ -26,6 +26,7 @@ class GUI{
           c.set_Perspective("GUI");
       break;
       case "SIMULATOR":
+          DemoDay.run();
           c.set_Perspective("SIMULATOR");
           pathplannerscreen = false;
       break;
@@ -37,11 +38,13 @@ class GUI{
       break;
       
       case "SHOWCASE":
+          DemoDay.run();
           c.set_Perspective("SHOWCASE");
           pathplannerscreen = true;
       break;
       
       case "PLANNER":
+          DemoDay.run();
           c.set_Perspective("PLANNER");
           planner.display();
       break;
@@ -53,6 +56,7 @@ class GUI{
       break;
       
         case "SCENARIO":
+          DemoDay.run();
           c.set_Perspective("SCENARIO");
           scenario.display();
           

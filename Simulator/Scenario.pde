@@ -12,6 +12,7 @@ class Scenario{
   void run(){
     carlocation = car.getLocation().copy();
     draw_road();
+     draw_Finish();
     pushMatrix();
     translate(0,0,5);
     draw_road();
@@ -31,19 +32,22 @@ class Scenario{
                 fill(60);
                 shape(road, gridWidth-margin, margin, gridWidth-(margin*2), gridHeight-(margin*2));
                 translate(0,0,-1);
-                fill(255);
+                stroke(255);
+                fill(255,255,255);
                 shape(roadlines, gridWidth-margin, margin, gridWidth-(margin*2), gridHeight-(margin*2));
                
       popMatrix();
   }
   
   void draw_buildings(){
+    
+        int buildingHeight = 270;
   
         for( int i = 0; i <6; i++){
         pushMatrix();
         translate(250 + i*220,250,-150);
         fill(255);
-        box(120,80,150);
+        box(120,80,buildingHeight);
         popMatrix();
         }
         
@@ -51,7 +55,7 @@ class Scenario{
         pushMatrix();
         translate(250 + i*220,550,-150);
         fill(255);
-        box(80,120,150);
+        box(80,120,buildingHeight);
         popMatrix();
         }
         
@@ -61,7 +65,7 @@ class Scenario{
         pushMatrix();
         translate(200 + i*240,0,-150);
         fill(255);
-        box(200,80,150);
+        box(200,80,buildingHeight);
         popMatrix();
         }
         
@@ -71,9 +75,25 @@ class Scenario{
         pushMatrix();
         translate(200 + i*240,gridHeight,-150);
         fill(255);
-        box(200,80,150);
+        box(200,80,buildingHeight);
         popMatrix();
         }
+  }
+  
+  void draw_Finish(){
+       fill(200,200,0);
+       pushMatrix();
+        translate(750,450,0);
+        //fill(255);
+        box(10,10,120);
+        popMatrix();
+        
+        pushMatrix();
+        translate(850,450,0);
+        //fill(255);
+        box(10,10,120);
+        popMatrix();
+  
   }
   
   void scenario1(){

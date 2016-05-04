@@ -211,11 +211,11 @@ class PathPlanner {
 
       pushMatrix();
       strokeWeight(1);
-      line(locationPoint.x, locationPoint.y, LocationFormerPoint.x, LocationFormerPoint.y);
+     // line(locationPoint.x, locationPoint.y, LocationFormerPoint.x, LocationFormerPoint.y);
       translate(0, 0, -4);
       strokeWeight(4);
       stroke(0, 200, 200);
-      line(locationPoint.x, locationPoint.y, LocationFormerPoint.x, LocationFormerPoint.y);
+     // line(locationPoint.x, locationPoint.y, LocationFormerPoint.x, LocationFormerPoint.y);
       stroke(255);
       strokeWeight(1);
       popMatrix();

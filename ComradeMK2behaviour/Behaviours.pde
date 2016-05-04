@@ -121,7 +121,7 @@ class Behaviours {
     case "WANT_MANUAL":
         
         // make speed dependant of the can autonomous drive percentage
-        int velocityLimit = 100/ (system.getDriveAutoSum() +15);
+        int velocityLimit = 140/ (system.getDriveAutoSum() +15);
         systemPrint(state);
         if(animationcounter<=200){
         comrade.Set_Target_Blue(255.0);

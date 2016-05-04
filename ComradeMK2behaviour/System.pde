@@ -28,11 +28,13 @@ class System{
     if(mode == "USERTEST"){
     // set targets
     if(testState == 0){candriveTarget = 100.0;}
-    if(testState == 1){candriveTarget = 100.0;}
-    if(testState == 2){candriveTarget = 50.0;}
+    if(testState == 1){candriveTarget = 80.0;}
+    if(testState == 2){candriveTarget = 30.0;}
     if(testState == 3){candriveTarget = 0.0;}
     if(testState == 4){candriveTarget = 100.0;}
-    if(testState == 5){candriveTarget = 100.0;}
+    if(testState == 5){candriveTarget = 100.0;
+    //fsm.write("gui","SETWANTMANUAL");
+    }
     
     // smooth
     if(candriveNetto > candriveTarget){   candriveNetto -= candriveH;  }

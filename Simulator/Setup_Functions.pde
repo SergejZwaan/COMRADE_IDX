@@ -33,6 +33,13 @@ void initialize_carShape() {
   carShape.scale(5);
   carShape.rotateY(PI);
   carShape.rotateX(PI/2);
+  
+    testDummy = loadShape("testdummy.obj");
+  testDummy.disableStyle();
+  testDummy.fill(255);
+  testDummy.scale(5);
+  testDummy.rotateY(PI);
+  testDummy.rotateX(PI/2);
 }
 
 void initialize_joyStick() {
